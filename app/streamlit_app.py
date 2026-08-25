@@ -26,6 +26,11 @@ metin = st.text_area(
     placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin: ...",
 )
 
+detayli_analiz = st.checkbox(
+    "Detaylı kelime analizi de göster (biraz daha yavaş çalışır)",
+    value=False,
+)
+
 kontrol_edildi = st.button("Mesajı Kontrol Et", type="primary", use_container_width=True)
 
 if kontrol_edildi:
@@ -59,6 +64,31 @@ if kontrol_edildi:
                 "**resmi telefon numarasından** arayıp doğrulayın\n"
                 "- Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın"
             )
+
+        if detayli_analiz:
+            st.subheader("🔍 Kelime bazlı analiz (deneysel)")
+            try:
+                with st.spinner("Kelimeler tek tek inceleniyor, bu biraz sürebilir..."):
+                    from src.explain import shap_aciklama_uret
+                    kelime_etkileri, _ = shap_aciklama_uret(metin, hedef_sinif=risk, max_evals=200)
+
+                st.caption(
+                    "Modelimiz kararını verirken hangi kelimelere ne kadar önem verdiğini gösterir. "
+                    "🔴 kırmızı kelimeler riski artırıyor, 🟢 yeşil kelimeler riski azaltıyor. "
+                    "Bu analiz deneyseldir, model bazen insan sezgisinden farklı kalıplar öğrenmiş olabilir."
+                )
+
+                en_etkili = [k for k in kelime_etkileri if abs(k[1]) > 0.01][:8]
+                if not en_etkili:
+                    st.write("Belirgin bir kelime etkisi bulunamadı.")
+                else:
+                    for kelime, deger in en_etkili:
+                        if deger > 0:
+                            st.markdown(f"🔴 **{kelime}** — riski artırıyor ({deger:+.3f})")
+                        else:
+                            st.markdown(f"🟢 **{kelime}** — riski azaltıyor ({deger:+.3f})")
+            except Exception as e:
+                st.caption(f"Kelime analizi şu an yapılamadı: {e}")
 
         with st.expander("Teknik detaylar (opsiyonel)"):
             st.write("Model olasılık dağılımı:")
