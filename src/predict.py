@@ -1,8 +1,6 @@
 
 """
 Egitilmis modeli yukleyip tahmin yapan modul.
-NLP model skoru + kural tabanli feature skorlarini birlestirerek
-nihai risk seviyesini ve aciklamayi dondurur.
 """
 
 import pickle
@@ -32,10 +30,6 @@ RISK_ETIKETLERI = {
 
 
 def tahmin_et(metin):
-    """
-    Bir mesaj metni alir, model tahmini + kural tabanli aciklama +
-    olasilik skorlarini birlestirip sonuc sozlugu dondurur.
-    """
     if not metin or not metin.strip():
         return {
             "risk_seviyesi": "belirsiz",
@@ -59,6 +53,12 @@ def tahmin_et(metin):
     ):
         tahmin = "supheli"
         nedenler.insert(0, "Model güvenli dese de bazı şüpheli kalıplar tespit edildiği için temkinli davranıyoruz.")
+
+    genel_fallback = "Belirgin bir kural tabanli kalip yakalanmadi"
+    if tahmin == "guvenli":
+        nedenler = ["Belirgin bir dolandırıcılık kalıbı tespit edilmedi, mesaj güvenli görünüyor. Yine de emin olmadığınız bir gönderense dikkatli olun."]
+    elif len(nedenler) == 1 and genel_fallback in nedenler[0]:
+        nedenler = ["Kelime bazlı kurallarımız net bir kalıp yakalamadı, ancak yapay zeka modelimiz metnin genel yapısında risk işaretleri tespit etti. Emin değilseniz gönderen kişiyi başka bir kanaldan (telefonla arayarak) doğrulayın."]
 
     etiket = RISK_ETIKETLERI.get(tahmin, RISK_ETIKETLERI["supheli"])
 
