@@ -56,7 +56,6 @@ st.markdown("""
         margin: 1.6rem 0 0.7rem 0;
     }
 
-    /* --- Istatistik seridi --- */
     .istatistik-serit {
         display: flex;
         gap: 0.7rem;
@@ -90,7 +89,6 @@ st.markdown("""
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
-    /* --- Sonuc karti --- */
     .sonuc-cerceve {
         margin-top: 1.6rem;
         border-radius: 20px;
@@ -140,49 +138,79 @@ st.markdown("""
         margin-top: 0.15rem;
     }
 
+    .neden-baslik {
+        color: #9CA3B8;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.7rem;
+        padding-top: 0.4rem;
+        border-top: 1px solid #1F2740;
+    }
     .neden-satiri {
         display: flex;
-        gap: 0.7rem;
-        padding: 0.7rem 0;
-        border-top: 1px solid #1F2740;
-        color: #D1D5DB;
-        font-size: 0.9rem;
+        align-items: flex-start;
+        gap: 0.65rem;
+        padding: 0.5rem 0;
+        color: #D6D9E4;
+        font-size: 0.92rem;
         line-height: 1.55;
     }
-    .neden-satiri:first-of-type { border-top: none; }
-    .neden-ikon { color: #818CF8; flex-shrink: 0; }
+    .neden-nokta {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #818CF8;
+        flex-shrink: 0;
+        margin-top: 0.55rem;
+    }
 
     .aksiyon-kutu {
         background-color: #151B2B;
         border: 1px solid #232B45;
         border-radius: 16px;
-        padding: 1.3rem 1.5rem;
+        padding: 1.4rem 1.5rem;
         margin-top: 1.3rem;
         animation: yumusakGiris 0.5s ease-out;
     }
     .aksiyon-baslik {
         color: #F3F4F6;
         font-weight: 700;
-        font-size: 0.95rem;
-        margin-bottom: 0.9rem;
+        font-size: 0.98rem;
+        margin-bottom: 1rem;
     }
     .aksiyon-satiri {
         display: flex;
-        align-items: flex-start;
-        gap: 0.6rem;
-        color: #B8BECF;
-        font-size: 0.87rem;
-        padding: 0.4rem 0;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.55rem 0;
+        border-top: 1px solid #1E2540;
+    }
+    .aksiyon-satiri:first-of-type { border-top: none; }
+    .aksiyon-ikon-daire {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background-color: #1E2540;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+    .aksiyon-metin {
+        color: #C3C8D6;
+        font-size: 0.88rem;
         line-height: 1.5;
     }
-    .aksiyon-satiri .ikon { flex-shrink: 0; }
+    .aksiyon-metin strong { color: #F3F4F6; }
 
-    /* --- Gecmis sorgular --- */
     .gecmis-satiri {
         display: flex;
         align-items: center;
         gap: 0.7rem;
-        padding: 0.6rem 0.8rem;
+        padding: 0.65rem 0.85rem;
         border-radius: 10px;
         margin-bottom: 0.4rem;
         background-color: #12172A;
@@ -207,6 +235,18 @@ st.markdown("""
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+    .gecmis-etiket {
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+    .etiket-yuksek { background-color: #3A1518; color: #F87171; }
+    .etiket-supheli { background-color: #3A2E10; color: #FBBF24; }
+    .etiket-guvenli { background-color: #103A22; color: #4ADE80; }
     .gecmis-saat {
         color: #565E77;
         font-size: 0.75rem;
@@ -274,11 +314,9 @@ except Exception as e:
     st.error(f"Model yüklenirken bir hata oluştu: {e}")
     st.stop()
 
-# --- Oturum gecmisini baslat ---
 if "gecmis" not in st.session_state:
     st.session_state.gecmis = []
 
-# --- Istatistik seridi (gecmis varsa goster) ---
 if st.session_state.gecmis:
     toplam = len(st.session_state.gecmis)
     yuksek_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "yuksek_riskli")
@@ -339,6 +377,12 @@ else:
 
 analiz_butonu = st.button("🔍  Mesajı Analiz Et", type="primary", use_container_width=True)
 
+ETIKET_METNI = {
+    "yuksek_riskli": "Yüksek Riskli",
+    "supheli": "Şüpheli",
+    "guvenli": "Güvenli",
+}
+
 if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
@@ -350,13 +394,12 @@ if analiz_butonu:
         emoji = sonuc["emoji"]
         baslik = sonuc["baslik"]
 
-        # Gecmise ekle (en yeni en ustte olacak sekilde)
         st.session_state.gecmis.insert(0, {
             "mesaj": mesaj[:60] + ("..." if len(mesaj) > 60 else ""),
             "risk": risk,
             "saat": datetime.now().strftime("%H:%M"),
         })
-        st.session_state.gecmis = st.session_state.gecmis[:10]  # son 10 ile sinirla
+        st.session_state.gecmis = st.session_state.gecmis[:10]
 
         cerceve_sinif = {
             "yuksek_riskli": "cerceve-yuksek",
@@ -377,7 +420,7 @@ if analiz_butonu:
         }.get(risk, "")
 
         nedenler_html = "".join(
-            f'<div class="neden-satiri"><span class="neden-ikon">▸</span><span>{n}</span></div>'
+            f'<div class="neden-satiri"><span class="neden-nokta"></span><span>{n}</span></div>'
             for n in sonuc["nedenler"]
         )
 
@@ -391,6 +434,7 @@ if analiz_butonu:
                         <div class="sonuc-alt-metin">{alt_metin}</div>
                     </div>
                 </div>
+                <div class="neden-baslik">Değerlendirme Gerekçesi</div>
                 {nedenler_html}
             </div>
         </div>
@@ -399,16 +443,30 @@ if analiz_butonu:
         if risk in ("yuksek_riskli", "supheli"):
             st.markdown("""
             <div class="aksiyon-kutu">
-                <div class="aksiyon-baslik">Ne yapmalısınız?</div>
-                <div class="aksiyon-satiri"><span class="ikon">🔗</span><span>Mesajdaki linke&nbsp;<strong>tıklamayın</strong></span></div>
-                <div class="aksiyon-satiri"><span class="ikon">🔒</span><span>Kişisel bilgi ya da para göndermeyin</span></div>
-                <div class="aksiyon-satiri"><span class="ikon">📞</span><span>Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın</span></div>
-                <div class="aksiyon-satiri"><span class="ikon">🚨</span><span>Tehdit/şantaj içeriyorsa&nbsp;<strong>155 Polis İmdat</strong>&nbsp;arayın</span></div>
-                <div class="aksiyon-satiri"><span class="ikon">👨‍👩‍👧</span><span>Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın</span></div>
+                <div class="aksiyon-baslik">Şimdi Ne Yapmalısınız?</div>
+                <div class="aksiyon-satiri">
+                    <div class="aksiyon-ikon-daire">🔗</div>
+                    <div class="aksiyon-metin">Mesajdaki linke <strong>kesinlikle tıklamayın</strong></div>
+                </div>
+                <div class="aksiyon-satiri">
+                    <div class="aksiyon-ikon-daire">🔒</div>
+                    <div class="aksiyon-metin">Kişisel bilgi ya da para <strong>paylaşmayın</strong></div>
+                </div>
+                <div class="aksiyon-satiri">
+                    <div class="aksiyon-ikon-daire">📞</div>
+                    <div class="aksiyon-metin">Şüpheliyseniz kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div>
+                </div>
+                <div class="aksiyon-satiri">
+                    <div class="aksiyon-ikon-daire">🚨</div>
+                    <div class="aksiyon-metin">Tehdit/şantaj içeriyorsa hemen <strong>155 Polis İmdat</strong>'ı arayın</div>
+                </div>
+                <div class="aksiyon-satiri">
+                    <div class="aksiyon-ikon-daire">👨‍👩‍👧</div>
+                    <div class="aksiyon-metin">Emin değilseniz, teknolojiye yakın bir yakınınıza danışın</div>
+                </div>
             </div>
             """, unsafe_allow_html=True)
 
-# --- Gecmis sorgular bolumu ---
 if st.session_state.gecmis:
     st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
 
@@ -417,14 +475,22 @@ if st.session_state.gecmis:
         "supheli": "nokta-supheli",
         "guvenli": "nokta-guvenli",
     }
+    etiket_sinif_haritasi = {
+        "yuksek_riskli": "etiket-yuksek",
+        "supheli": "etiket-supheli",
+        "guvenli": "etiket-guvenli",
+    }
 
     gecmis_html = ""
     for kayit in st.session_state.gecmis:
         nokta_sinif = nokta_sinif_haritasi.get(kayit["risk"], "nokta-supheli")
+        etiket_sinif = etiket_sinif_haritasi.get(kayit["risk"], "etiket-supheli")
+        etiket_metni = ETIKET_METNI.get(kayit["risk"], "Bilinmiyor")
         gecmis_html += f"""
         <div class="gecmis-satiri">
             <div class="gecmis-nokta {nokta_sinif}"></div>
             <div class="gecmis-mesaj">{kayit['mesaj']}</div>
+            <div class="gecmis-etiket {etiket_sinif}">{etiket_metni}</div>
             <div class="gecmis-saat">{kayit['saat']}</div>
         </div>
         """
