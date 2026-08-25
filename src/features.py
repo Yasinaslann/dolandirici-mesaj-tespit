@@ -25,19 +25,27 @@ TEHDIT_KELIMELERI = [
     "borcunuz", "gumrukte", "dogrulama", "sifirlanmistir",
 ]
 
-SANTAJ_TEHDIT_KELIMELERI = [
-    "kacirir", "kacirim", "zarar veririm", "zarar gorursun", "pisman olursun",
-    "basina bir sey gelir", "seni bulurum", "hesabini gorurum",
-    "param gelmezse", "atmazsan", "vermezsen", "oldur", "santaj",
-    "vururum", "keserim", "kan dokerim", "tehdit ederim", "hapis",
-    "gebert", "bicak", "taciz", "tecavuz", "zorla", "isterse zarar",
-    "doverim", "ifsa ederim", "mahvederim", "rezil ederim",
-    "isini bitiririm", "hayatini karartirim", "yakarim",
+FIZIKSEL_SIDDET_KELIMELERI = [
+    "oldur", "oldun", "oldururum", "oldurulur", "gebert", "gebertirim",
+    "vururum", "keserim", "bicaklarim", "kan dokerim", "doverim",
+    "kacirir", "kacirim", "zarar veririm", "zarar gorursun",
+    "hayatina son veririm", "canina kiyarim", "mahvederim seni",
 ]
+
+SANTAJ_TEHDIT_KELIMELERI = [
+    "pisman olursun", "basina bir sey gelir", "seni bulurum", "hesabini gorurum",
+    "param gelmezse", "atmazsan", "vermezsen", "santaj",
+    "tehdit ederim", "hapis", "taciz", "tecavuz", "zorla", "isterse zarar",
+    "ifsa ederim", "rezil ederim", "isini bitiririm", "hayatini karartirim",
+    "yakarim",
+]
+
+GENEL_KOSUL_BAGLACLARI = ["yoksa"]
 
 ZORLAMA_KOSUL_KELIMELERI = [
     "gelmezsen", "yapmazsan", "vermezsen", "aramazsan", "cevap vermezsen",
     "soylemezsen", "gelmez isen", "gelmedigin takdirde", "odemezsen",
+    "gelmen lazim", "yapman lazim", "gelmelisin",
 ]
 
 PARA_TALEBI_KELIMELERI = [
@@ -71,14 +79,10 @@ SUPHELI_DOMAIN_KALIPLARI = [
     r"\b[a-z]{2,6}\d\.com\b",
 ]
 
-# Sayi + tl/lira ile birlikte kullanilan klasik para talebi kalibi
 PARA_TALEBI_REGEX = re.compile(
     r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim|atesle)"
 )
 
-# YENI: Rakam icermeyen, argo/dolayli para talebi kaliplari
-# "bir miktar para atesle", "biraz para gonder", "acil param lazim" gibi
-# net bir tutar belirtmeyen ama para istedigi belli olan cumleleri yakalar.
 GENEL_PARA_TALEBI_REGEX = re.compile(
     r"\b(biraz|bir miktar|birazcik|acil|az)?\s*para\s*"
     r"(atesle|at|gonder|yolla|ver|isterim|istiyorum|lazim)"
@@ -101,9 +105,14 @@ def _supheli_link_mi(metin):
 
 def _zorlama_kalibi_mi(metin):
     metin_normalize = _normalize(metin)
+    tehdit_var = any(k in metin_normalize for k in SANTAJ_TEHDIT_KELIMELERI) or any(
+        k in metin_normalize for k in FIZIKSEL_SIDDET_KELIMELERI
+    )
+    if not tehdit_var:
+        return False
     kosul_var = any(k in metin_normalize for k in ZORLAMA_KOSUL_KELIMELERI)
-    tehdit_var = any(k in metin_normalize for k in SANTAJ_TEHDIT_KELIMELERI)
-    return kosul_var and tehdit_var
+    genel_baglac_var = any(k in metin_normalize for k in GENEL_KOSUL_BAGLACLARI)
+    return kosul_var or genel_baglac_var
 
 
 def _para_talebi_regex_mi(metin):
@@ -115,6 +124,8 @@ def _genel_para_talebi_mi(metin):
 
 
 def ozellik_cikar(metin):
+    fiziksel_siddet_skoru = _kelime_sayisi(metin, FIZIKSEL_SIDDET_KELIMELERI)
+
     santaj_skoru = _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI)
     if _zorlama_kalibi_mi(metin):
         santaj_skoru += 1
@@ -132,6 +143,7 @@ def ozellik_cikar(metin):
         "aciliyet_skoru": _kelime_sayisi(metin, ACILIYET_KELIMELERI),
         "odul_skoru": _kelime_sayisi(metin, ODUL_KELIMELERI),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
+        "fiziksel_siddet_skoru": fiziksel_siddet_skoru,
         "santaj_tehdit_skoru": santaj_skoru,
         "para_talebi_skoru": para_skoru,
         "genel_para_talebi": int(genel_para_talebi),
@@ -149,10 +161,15 @@ def acikla(metin):
     nedenler = []
     ozellikler = ozellik_cikar(metin)
 
-    if ozellikler["santaj_tehdit_skoru"] > 0 and ozellikler["para_talebi_skoru"] > 0:
+    if ozellikler["fiziksel_siddet_skoru"] > 0:
+        nedenler.append("Bu mesaj doğrudan fiziksel tehdit içermektedir, derhal polise bildirin.")
+        if ozellikler["para_talebi_skoru"] > 0 or ozellikler["genel_para_talebi"]:
+            nedenler.append("Ayrica mesaj para/havale talebiyle birlikte geliyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
+    elif ozellikler["santaj_tehdit_skoru"] > 0 and ozellikler["para_talebi_skoru"] > 0:
         nedenler.append("Dogrudan tehdit icerip karsiliginda para talep ediyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
     elif ozellikler["santaj_tehdit_skoru"] > 0:
         nedenler.append("Mesajda korkutucu, zorlayici veya dogrudan tehdit edici bir dil kullaniliyor. Guvende degilseniz hemen 155 Polis Imdat'i arayin.")
+
     if ozellikler["kimlik_bilgisi_skoru"] > 0 and (ozellikler["kripto_varlik_skoru"] > 0 or ozellikler["link_var"]):
         nedenler.append("Mesajda acik metin sifre/hesap bilgisi ve kripto varlik/link birlikte geciyor - bu genelde ele gecirilmis bir hesaptan gonderilen dolandiricilik mesajidir. Bu bilgilerle hicbir islem yapmayin.")
     elif ozellikler["kripto_varlik_skoru"] > 0 and ozellikler["link_var"]:
@@ -172,9 +189,6 @@ def acikla(metin):
     if ozellikler["para_talebi_skoru"] > 0 and not nedenler:
         nedenler.append("Mesaj dogrudan para/havale talep ediyor - tanimadiginiz ya da supheli bir baglamda geldiyse dikkatli olun.")
 
-    # YENI: Rakam icermeyen/argo para talebi TEK BASINA tetiklenirse (baska
-    # hicbir tehdit/link sinyali yoksa) sari seviyeye cekilecek ozel uyari.
-    # Bu uyari nedenler listesinde EN SONDA, digerleriyle celismeyecek sekilde eklenir.
     if ozellikler["genel_para_talebi"] and not nedenler:
         nedenler.append(
             "Bu mesaj tanıdığınız birinden gelse bile hesabı çalınmış olabilir. "
