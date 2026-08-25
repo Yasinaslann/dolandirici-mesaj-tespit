@@ -1,72 +1,33 @@
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-"""
-Egitilmis modeli yukleyip tahmin yapan modul.
-"""
+# Kendi Hugging Face deponun adı
+MODEL_NAME = "YasinAsl0n/dolandirici-mesaj-tespit-bert"
 
-import pickle
-from pathlib import Path
+# Sınıf eşleştirmeleri (Model eğitimindeki sıraya göre)
+ID_TO_ETIKET = {0: "guvenli", 1: "supheli", 2: "yuksek_riskli"}
 
-from src.features import acikla, ozellik_cikar
+def load_model():
+    """Hugging Face Hub'dan model ve tokenizer'ı indirir/yükler."""
+    print("BERT modeli Hugging Face'ten yükleniyor...")
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+    return tokenizer, model
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_YOLU = BASE_DIR / "models" / "risk_model.pkl"
-
-_model_cache = None
-
-
-def model_getir():
-    global _model_cache
-    if _model_cache is None:
-        with open(MODEL_YOLU, "rb") as f:
-            _model_cache = pickle.load(f)
-    return _model_cache
-
-
-RISK_ETIKETLERI = {
-    "guvenli": {"emoji": "🟢", "baslik": "Güvenli görünüyor"},
-    "supheli": {"emoji": "🟡", "baslik": "Şüpheli, dikkatli olun"},
-    "yuksek_riskli": {"emoji": "🔴", "baslik": "Yüksek riskli - dolandırıcılık olabilir!"},
-}
-
-
-def tahmin_et(metin):
-    if not metin or not metin.strip():
-        return {
-            "risk_seviyesi": "belirsiz",
-            "emoji": "⚪",
-            "baslik": "Analiz edilecek metin bulunamadı",
-            "olasiliklar": {},
-            "nedenler": [],
-            "kural_skorlari": {},
-        }
-
-    pipeline = model_getir()
-    tahmin = pipeline.predict([metin])[0]
-    olasiliklar = dict(zip(pipeline.classes_, pipeline.predict_proba([metin])[0]))
-
-    kural_ozellikleri = ozellik_cikar(metin)
-    nedenler = acikla(metin)
-
-    if (
-        tahmin == "guvenli"
-        and (kural_ozellikleri["supheli_link"] or kural_ozellikleri["tehdit_skoru"] >= 2)
-    ):
-        tahmin = "supheli"
-        nedenler.insert(0, "Model güvenli dese de bazı şüpheli kalıplar tespit edildiği için temkinli davranıyoruz.")
-
-    genel_fallback = "Belirgin bir kural tabanli kalip yakalanmadi"
-    if tahmin == "guvenli":
-        nedenler = ["Belirgin bir dolandırıcılık kalıbı tespit edilmedi, mesaj güvenli görünüyor. Yine de emin olmadığınız bir gönderense dikkatli olun."]
-    elif len(nedenler) == 1 and genel_fallback in nedenler[0]:
-        nedenler = ["Kelime bazlı kurallarımız net bir kalıp yakalamadı, ancak yapay zeka modelimiz metnin genel yapısında risk işaretleri tespit etti. Emin değilseniz gönderen kişiyi başka bir kanaldan (telefonla arayarak) doğrulayın."]
-
-    etiket = RISK_ETIKETLERI.get(tahmin, RISK_ETIKETLERI["supheli"])
-
-    return {
-        "risk_seviyesi": tahmin,
-        "emoji": etiket["emoji"],
-        "baslik": etiket["baslik"],
-        "olasiliklar": olasiliklar,
-        "nedenler": nedenler,
-        "kural_skorlari": kural_ozellikleri,
-    }
+def predict_message(text, tokenizer, model):
+    """Gelen mesajı BERT modeli ile analiz eder."""
+    # Mesajı modelin anlayacağı formata (tensor) çevir
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=128)
+    
+    # Tahmin yap
+    with torch.no_grad():
+        outputs = model(**inputs)
+        
+    # En yüksek olasılıklı sınıfı bul
+    logits = outputs.logits
+    predicted_class_id = logits.argmax(axis=1).item()
+    
+    # ID'yi metne çevir (örn: 2 -> yuksek_riskli)
+    sonuc_etiket = ID_TO_ETIKET[predicted_class_id]
+    
+    return sonuc_etiket

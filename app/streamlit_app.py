@@ -1,103 +1,42 @@
-
+import streamlit as st
 import sys
 from pathlib import Path
 
-import streamlit as st
-
+# src klasörünü sisteme tanıt
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(BASE_DIR))
+sys.path.append(str(BASE_DIR))
 
-from src.predict import tahmin_et
+from src.predict import load_model, predict_message
 
-st.set_page_config(
-    page_title="Dolandırıcı Mesaj Tespit Asistanı",
-    page_icon="🛡️",
-    layout="centered",
-)
+st.set_page_config(page_title="Dolandırıcı Mesaj Tespit", page_icon="🛡️")
 
 st.title("🛡️ Dolandırıcı Mesaj Tespit Asistanı")
-st.caption("Şüpheli bir SMS, WhatsApp ya da e-posta mesajı mı aldınız? Aşağıya yapıştırın, birlikte kontrol edelim.")
+st.markdown("Şüphelendiğiniz mesajı aşağıya yapıştırın, **Yapay Zeka (BERT)** sizin için analiz etsin.")
 
-st.divider()
+# Modeli Streamlit'in önbelleğine (cache) alıyoruz (Sadece 1 kere indirilecek)
+@st.cache_resource(show_spinner="Yapay zeka modeli yükleniyor... Lütfen bekleyin.")
+def get_model():
+    return load_model()
 
-metin = st.text_area(
-    "Mesajı buraya yapıştırın",
-    height=150,
-    placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin: ...",
-)
+try:
+    tokenizer, model = get_model()
+except Exception as e:
+    st.error(f"Model yüklenirken bir hata oluştu: {e}")
+    st.stop()
 
-detayli_analiz = st.checkbox(
-    "Detaylı kelime analizi de göster (biraz daha yavaş çalışır)",
-    value=False,
-)
+mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150)
 
-kontrol_edildi = st.button("Mesajı Kontrol Et", type="primary", use_container_width=True)
-
-if kontrol_edildi:
-    if not metin.strip():
-        st.warning("Lütfen kontrol etmek istediğiniz mesajı yapıştırın.")
+if st.button("Mesajı Analiz Et", type="primary"):
+    if not mesaj.strip():
+        st.warning("Lütfen analiz edilecek bir mesaj girin.")
     else:
-        with st.spinner("Mesaj analiz ediliyor..."):
-            sonuc = tahmin_et(metin)
-
-        risk = sonuc["risk_seviyesi"]
-        emoji = sonuc["emoji"]
-        baslik = sonuc["baslik"]
-
-        if risk == "yuksek_riskli":
-            st.error(emoji + " **" + baslik + "**")
-        elif risk == "supheli":
-            st.warning(emoji + " **" + baslik + "**")
+        with st.spinner("Yapay zeka bağlamı inceliyor..."):
+            sonuc = predict_message(mesaj, tokenizer, model)
+            
+        st.markdown("---")
+        if sonuc == "yuksek_riskli":
+            st.error("🚨 **YÜKSEK RİSKLİ MESAJ!** \n\nBu mesaj belirgin dolandırıcılık kalıpları (korku, aciliyet, sahte link vb.) içeriyor. **Lütfen içindeki linklere tıklamayın ve kişisel bilgilerinizi paylaşmayın.**")
+        elif sonuc == "supheli":
+            st.warning("⚠️ **ŞÜPHELİ MESAJ** \n\nBu mesajda şüpheli unsurlar (bedava kazanç, iş vaadi vb.) tespit edildi. Doğruluğundan emin olmadığınız sürece etkileşime girmeyin.")
         else:
-            st.success(emoji + " **" + baslik + "**")
-
-        st.subheader("Neden bu sonucu aldık?")
-        for neden in sonuc["nedenler"]:
-            st.markdown("- " + neden)
-
-        if risk in ("yuksek_riskli", "supheli"):
-            st.info(
-                "**Ne yapmalısınız?**\n\n"
-                "- Mesajdaki linke **tıklamayın**\n"
-                "- Kişisel bilgi ya da para göndermeyin\n"
-                "- Şüpheliyseniz ilgili kurumu (banka, kargo şirketi vb.) "
-                "**resmi telefon numarasından** arayıp doğrulayın\n"
-                "- Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın"
-            )
-
-        if detayli_analiz:
-            st.subheader("🔍 Kelime bazlı analiz (deneysel)")
-            try:
-                with st.spinner("Kelimeler tek tek inceleniyor, bu biraz sürebilir..."):
-                    from src.explain import shap_aciklama_uret
-                    kelime_etkileri, _ = shap_aciklama_uret(metin, hedef_sinif=risk, max_evals=200)
-
-                st.caption(
-                    "Modelimiz kararını verirken hangi kelimelere ne kadar önem verdiğini gösterir. "
-                    "🔴 kırmızı kelimeler riski artırıyor, 🟢 yeşil kelimeler riski azaltıyor. "
-                    "Bu analiz deneyseldir, model bazen insan sezgisinden farklı kalıplar öğrenmiş olabilir."
-                )
-
-                en_etkili = [k for k in kelime_etkileri if abs(k[1]) > 0.01][:8]
-                if not en_etkili:
-                    st.write("Belirgin bir kelime etkisi bulunamadı.")
-                else:
-                    for kelime, deger in en_etkili:
-                        if deger > 0:
-                            st.markdown(f"🔴 **{kelime}** — riski artırıyor ({deger:+.3f})")
-                        else:
-                            st.markdown(f"🟢 **{kelime}** — riski azaltıyor ({deger:+.3f})")
-            except Exception as e:
-                st.caption(f"Kelime analizi şu an yapılamadı: {e}")
-
-        with st.expander("Teknik detaylar (opsiyonel)"):
-            st.write("Model olasılık dağılımı:")
-            st.json({k: round(float(v), 3) for k, v in sonuc["olasiliklar"].items()})
-            st.write("Kural tabanlı sinyal skorları:")
-            st.json(sonuc["kural_skorlari"])
-
-st.divider()
-st.caption(
-    "⚠️ Bu araç bir yardımcı sistemdir, kesin doğruluk garanti etmez. "
-    "Şüphe durumunda her zaman ilgili kurumu resmi kanallardan doğrulayın."
-)
+            st.success("✅ **GÜVENLİ GÖRÜNÜYOR** \n\nMesajda yapay zeka tarafından dolandırıcılık veya risk unsuru tespit edilmedi. Yine de normal güvenlik tedbirlerinizi elden bırakmayın.")
