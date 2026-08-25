@@ -37,7 +37,6 @@ def tahmin_et(metin, tokenizer=None, model=None):
     if tokenizer is None or model is None:
         tokenizer, model = load_model()
 
-    # 1) BERT tahmini
     inputs = tokenizer(metin, return_tensors="pt", truncation=True, padding=True, max_length=128)
     with torch.no_grad():
         outputs = model(**inputs)
@@ -45,12 +44,10 @@ def tahmin_et(metin, tokenizer=None, model=None):
     olasiliklar = {ID_TO_ETIKET[i]: float(olasilik_tensor[i]) for i in range(3)}
     tahmin = ID_TO_ETIKET[int(olasilik_tensor.argmax())]
 
-    # 2) Kural tabanli guvenlik agi (features.py - genel santaj/tehdit/para talebi mantigi)
     kural_ozellikleri = ozellik_cikar(metin)
     nedenler = acikla(metin)
 
-    # Guclu kural sinyali varsa BERT ne derse desin sonucu yukselt
-    if kural_ozellikleri["santaj_tehdit_skoru"] > 0 and kural_ozellikleri["para_talebi_skoru"] > 0:
+    if kural_ozellikleri["santaj_tehdit_skoru"] > 0:
         tahmin = "yuksek_riskli"
     elif tahmin == "guvenli" and (kural_ozellikleri["supheli_link"] or kural_ozellikleri["tehdit_skoru"] >= 2):
         tahmin = "supheli"

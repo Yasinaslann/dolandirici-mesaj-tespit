@@ -31,16 +31,19 @@ SANTAJ_TEHDIT_KELIMELERI = [
     "param gelmezse", "atmazsan", "vermezsen", "oldur", "santaj",
     "vururum", "keserim", "kan dokerim", "tehdit ederim", "hapis",
     "gebert", "bicak", "taciz", "tecavuz", "zorla", "isterse zarar",
+    "doverim", "ifsa ederim", "mahvederim", "rezil ederim",
+    "isini bitiririm", "hayatini karartirim", "yakarim",
 ]
 
 ZORLAMA_KOSUL_KELIMELERI = [
     "gelmezsen", "yapmazsan", "vermezsen", "aramazsan", "cevap vermezsen",
-    "soylemezsen", "gelmez isen", "gelmedigin takdirde",
+    "soylemezsen", "gelmez isen", "gelmedigin takdirde", "odemezsen",
 ]
 
 PARA_TALEBI_KELIMELERI = [
     "tl at", "para at", "para gonder", "havale yap", "eft yap", "gonderir misin",
-    "ibana gonder", "hesabima gonder",
+    "ibana gonder", "hesabima gonder", "tl ver", "para ver", "para isterim",
+    "para istiyorum",
 ]
 
 RESMI_KURUM_KELIMELERI = [
@@ -58,6 +61,8 @@ SUPHELI_DOMAIN_KALIPLARI = [
     r"-guvenlik\.", r"-odeme\.", r"-tr\.com", r"hizli\.com",
 ]
 
+PARA_TALEBI_REGEX = re.compile(r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim)")
+
 
 def _kelime_sayisi(metin, kelime_listesi):
     metin_normalize = _normalize(metin)
@@ -74,24 +79,31 @@ def _supheli_link_mi(metin):
 
 
 def _zorlama_kalibi_mi(metin):
-    """'X yapmazsan/gelmezsen ...' gibi kosullu zorlama kaliplarini
-    herhangi bir olumsuz/tehdit ifadesiyle birlikte yakalar."""
     metin_normalize = _normalize(metin)
     kosul_var = any(k in metin_normalize for k in ZORLAMA_KOSUL_KELIMELERI)
     tehdit_var = any(k in metin_normalize for k in SANTAJ_TEHDIT_KELIMELERI)
     return kosul_var and tehdit_var
 
 
+def _para_talebi_regex_mi(metin):
+    return bool(PARA_TALEBI_REGEX.search(_normalize(metin)))
+
+
 def ozellik_cikar(metin):
     santaj_skoru = _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI)
     if _zorlama_kalibi_mi(metin):
         santaj_skoru += 1
+
+    para_skoru = _kelime_sayisi(metin, PARA_TALEBI_KELIMELERI)
+    if _para_talebi_regex_mi(metin):
+        para_skoru += 1
+
     return {
         "aciliyet_skoru": _kelime_sayisi(metin, ACILIYET_KELIMELERI),
         "odul_skoru": _kelime_sayisi(metin, ODUL_KELIMELERI),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
         "santaj_tehdit_skoru": santaj_skoru,
-        "para_talebi_skoru": _kelime_sayisi(metin, PARA_TALEBI_KELIMELERI),
+        "para_talebi_skoru": para_skoru,
         "resmi_kurum_skoru": _kelime_sayisi(metin, RESMI_KURUM_KELIMELERI),
         "akrabalik_skoru": _kelime_sayisi(metin, AKRABALIK_KELIMELERI),
         "link_var": int(_link_var_mi(metin)),
@@ -107,7 +119,7 @@ def acikla(metin):
     if ozellikler["santaj_tehdit_skoru"] > 0 and ozellikler["para_talebi_skoru"] > 0:
         nedenler.append("Dogrudan tehdit icerip karsiliginda para talep ediyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
     elif ozellikler["santaj_tehdit_skoru"] > 0:
-        nedenler.append("Mesajda korkutucu, zorlayici veya tehdit edici bir dil kullaniliyor. Guvende degilseniz 155 Polis Imdat'i arayin.")
+        nedenler.append("Mesajda korkutucu, zorlayici veya dogrudan tehdit edici bir dil kullaniliyor. Guvende degilseniz hemen 155 Polis Imdat'i arayin.")
     if ozellikler["aciliyet_skoru"] > 0:
         nedenler.append("Mesaj sizi aceleye getirmeye calisiyor (ornek: 'hemen', 'son gun').")
     if ozellikler["odul_skoru"] > 0:
