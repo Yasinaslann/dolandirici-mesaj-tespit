@@ -5,6 +5,20 @@ Kural tabanli feature cikarma modulu.
 
 import re
 
+TURKCE_HARF_HARITASI = str.maketrans({
+    "ç": "c", "Ç": "c",
+    "ğ": "g", "Ğ": "g",
+    "ı": "i", "İ": "i", "I": "i",
+    "ö": "o", "Ö": "o",
+    "ş": "s", "Ş": "s",
+    "ü": "u", "Ü": "u",
+})
+
+
+def _normalize(metin):
+    return metin.translate(TURKCE_HARF_HARITASI).lower()
+
+
 ACILIYET_KELIMELERI = [
     "hemen", "acil", "son gun", "son dakika", "24 saat", "2 saat",
     "simdi", "gecikmeden", "bugun", "derhal", "kaybetmeyin", "az kaldi",
@@ -48,8 +62,8 @@ SUPHELI_DOMAIN_KALIPLARI = [
 
 
 def _kelime_sayisi(metin, kelime_listesi):
-    metin_kucuk = metin.lower()
-    return sum(1 for kelime in kelime_listesi if kelime in metin_kucuk)
+    metin_normalize = _normalize(metin)
+    return sum(1 for kelime in kelime_listesi if kelime in metin_normalize)
 
 
 def _link_var_mi(metin):
