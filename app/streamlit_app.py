@@ -118,15 +118,19 @@ st.markdown("""
         color: #F3F4F6;
         font-weight: 700;
         font-size: 0.95rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.9rem;
     }
     .aksiyon-satiri {
         display: flex;
+        align-items: flex-start;
         gap: 0.6rem;
         color: #B8BECF;
         font-size: 0.87rem;
-        padding: 0.35rem 0;
+        padding: 0.4rem 0;
         line-height: 1.5;
+    }
+    .aksiyon-satiri .ikon {
+        flex-shrink: 0;
     }
 
     .footer-not {
@@ -271,11 +275,11 @@ if analiz_butonu:
             st.markdown("""
             <div class="aksiyon-kutu">
                 <div class="aksiyon-baslik">Ne yapmalısınız?</div>
-                <div class="aksiyon-satiri">🔗 Mesajdaki linke <strong>tıklamayın</strong></div>
-                <div class="aksiyon-satiri">🔒 Kişisel bilgi ya da para göndermeyin</div>
-                <div class="aksiyon-satiri">📞 Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın</div>
-                <div class="aksiyon-satiri">🚨 Tehdit/şantaj içeriyorsa <strong>155 Polis İmdat</strong>'ı arayın</div>
-                <div class="aksiyon-satiri">👨‍👩‍👧 Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın</div>
+                <div class="aksiyon-satiri"><span class="ikon">🔗</span><span>Mesajdaki linke&nbsp;<strong>tıklamayın</strong></span></div>
+                <div class="aksiyon-satiri"><span class="ikon">🔒</span><span>Kişisel bilgi ya da para göndermeyin</span></div>
+                <div class="aksiyon-satiri"><span class="ikon">📞</span><span>Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın</span></div>
+                <div class="aksiyon-satiri"><span class="ikon">🚨</span><span>Tehdit/şantaj içeriyorsa&nbsp;<strong>155 Polis İmdat</strong>&nbsp;arayın</span></div>
+                <div class="aksiyon-satiri"><span class="ikon">👨‍👩‍👧</span><span>Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın</span></div>
             </div>
             """, unsafe_allow_html=True)
 
