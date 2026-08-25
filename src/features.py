@@ -17,7 +17,8 @@ ACILIYET_KELIMELERI = [
 
 ODUL_KELIMELERI = [
     "kazandiniz", "tebrikler", "odul", "hediye", "cekilis", "ikramiye",
-    "ucretsiz", "bedava", "firsat", "indirim",
+    "ucretsiz", "bedava", "firsat", "indirim", "kupon", "puan kazandiniz",
+    "bonus", "hesabinizda kupon", "hesabinizda hediye",
 ]
 
 TEHDIT_KELIMELERI = [
@@ -88,6 +89,13 @@ GENEL_PARA_TALEBI_REGEX = re.compile(
     r"(atesle|at|gonder|yolla|ver|isterim|istiyorum|lazim)"
 )
 
+# YENI: "tikla" + para/tutar/kupon birlikte geciyorsa (sahte kupon/odul
+# tuzagi) - link olmasa bile bu klasik bir tuzak kalibi.
+TIKLA_ODUL_REGEX = re.compile(
+    r"\btikla\b.{0,20}\b(tl|lira|kupon|odul|hediye|bonus)\b|"
+    r"\b(tl|lira|kupon|odul|hediye|bonus)\b.{0,20}\btikla\b"
+)
+
 
 def _kelime_sayisi(metin, kelime_listesi):
     metin_normalize = _normalize(metin)
@@ -123,6 +131,10 @@ def _genel_para_talebi_mi(metin):
     return bool(GENEL_PARA_TALEBI_REGEX.search(_normalize(metin)))
 
 
+def _tikla_odul_mi(metin):
+    return bool(TIKLA_ODUL_REGEX.search(_normalize(metin)))
+
+
 def ozellik_cikar(metin):
     fiziksel_siddet_skoru = _kelime_sayisi(metin, FIZIKSEL_SIDDET_KELIMELERI)
 
@@ -136,12 +148,16 @@ def ozellik_cikar(metin):
 
     genel_para_talebi = _genel_para_talebi_mi(metin)
 
+    odul_skoru = _kelime_sayisi(metin, ODUL_KELIMELERI)
+    tikla_odul = _tikla_odul_mi(metin)
+
     kimlik_skoru = _kelime_sayisi(metin, KIMLIK_BILGISI_KELIMELERI)
     kripto_skoru = _kelime_sayisi(metin, KRIPTO_VARLIK_KELIMELERI)
 
     return {
         "aciliyet_skoru": _kelime_sayisi(metin, ACILIYET_KELIMELERI),
-        "odul_skoru": _kelime_sayisi(metin, ODUL_KELIMELERI),
+        "odul_skoru": odul_skoru,
+        "tikla_odul": int(tikla_odul),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
         "fiziksel_siddet_skoru": fiziksel_siddet_skoru,
         "santaj_tehdit_skoru": santaj_skoru,
@@ -174,9 +190,13 @@ def acikla(metin):
         nedenler.append("Mesajda acik metin sifre/hesap bilgisi ve kripto varlik/link birlikte geciyor - bu genelde ele gecirilmis bir hesaptan gonderilen dolandiricilik mesajidir. Bu bilgilerle hicbir islem yapmayin.")
     elif ozellikler["kripto_varlik_skoru"] > 0 and ozellikler["link_var"]:
         nedenler.append("Kripto varlik transferi ve supheli bir link birlikte geciyor - bu tur mesajlar genelde dolandiricilik icerir.")
+
+    if ozellikler["tikla_odul"]:
+        nedenler.append("'Tıkla' çağrısı bir tutar/kupon/ödül vaadiyle birlikte geliyor - bu klasik bir sahte kupon/ödül tuzağıdır, gerçek kurumlar bu şekilde bildirim yapmaz.")
+
     if ozellikler["aciliyet_skoru"] > 0:
         nedenler.append("Mesaj sizi aceleye getirmeye calisiyor (ornek: 'hemen', 'son gun').")
-    if ozellikler["odul_skoru"] > 0:
+    if ozellikler["odul_skoru"] > 0 and not ozellikler["tikla_odul"]:
         nedenler.append("Bir odul, hediye ya da kazanc vaat ediyor - bu klasik bir tuzak yontemidir.")
     if ozellikler["tehdit_skoru"] > 0:
         nedenler.append("Hesabinizin kapatilacagi/bloke edilecegi gibi bir tehdit iceriyor.")
