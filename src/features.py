@@ -43,10 +43,9 @@ ZORLAMA_KOSUL_KELIMELERI = [
 PARA_TALEBI_KELIMELERI = [
     "tl at", "para at", "para gonder", "havale yap", "eft yap", "gonderir misin",
     "ibana gonder", "hesabima gonder", "tl ver", "para ver", "para isterim",
-    "para istiyorum",
+    "para istiyorum", "para atesle", "atesleyin",
 ]
 
-# YENI: Kimlik bilgisi / hesap paylasimi ve kripto varlik dolandiriciligi sinyalleri
 KIMLIK_BILGISI_KELIMELERI = [
     "sifre:", "parola:", "şifre:", "hesap:", "kullanici adi:", "kullanıcı adı:",
 ]
@@ -69,10 +68,21 @@ AKRABALIK_KELIMELERI = [
 SUPHELI_DOMAIN_KALIPLARI = [
     r"bit\.ly", r"tinyurl", r"\.info\b", r"\.xyz\b", r"\.top\b",
     r"-guvenlik\.", r"-odeme\.", r"-tr\.com", r"hizli\.com",
-    r"\b[a-z]{2,6}\d\.com\b",  # kisa+rakamli garip domainler (bur7.com gibi)
+    r"\b[a-z]{2,6}\d\.com\b",
 ]
 
-PARA_TALEBI_REGEX = re.compile(r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim)")
+# Sayi + tl/lira ile birlikte kullanilan klasik para talebi kalibi
+PARA_TALEBI_REGEX = re.compile(
+    r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim|atesle)"
+)
+
+# YENI: Rakam icermeyen, argo/dolayli para talebi kaliplari
+# "bir miktar para atesle", "biraz para gonder", "acil param lazim" gibi
+# net bir tutar belirtmeyen ama para istedigi belli olan cumleleri yakalar.
+GENEL_PARA_TALEBI_REGEX = re.compile(
+    r"\b(biraz|bir miktar|birazcik|acil|az)?\s*para\s*"
+    r"(atesle|at|gonder|yolla|ver|isterim|istiyorum|lazim)"
+)
 
 
 def _kelime_sayisi(metin, kelime_listesi):
@@ -100,6 +110,10 @@ def _para_talebi_regex_mi(metin):
     return bool(PARA_TALEBI_REGEX.search(_normalize(metin)))
 
 
+def _genel_para_talebi_mi(metin):
+    return bool(GENEL_PARA_TALEBI_REGEX.search(_normalize(metin)))
+
+
 def ozellik_cikar(metin):
     santaj_skoru = _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI)
     if _zorlama_kalibi_mi(metin):
@@ -108,6 +122,8 @@ def ozellik_cikar(metin):
     para_skoru = _kelime_sayisi(metin, PARA_TALEBI_KELIMELERI)
     if _para_talebi_regex_mi(metin):
         para_skoru += 1
+
+    genel_para_talebi = _genel_para_talebi_mi(metin)
 
     kimlik_skoru = _kelime_sayisi(metin, KIMLIK_BILGISI_KELIMELERI)
     kripto_skoru = _kelime_sayisi(metin, KRIPTO_VARLIK_KELIMELERI)
@@ -118,6 +134,7 @@ def ozellik_cikar(metin):
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
         "santaj_tehdit_skoru": santaj_skoru,
         "para_talebi_skoru": para_skoru,
+        "genel_para_talebi": int(genel_para_talebi),
         "kimlik_bilgisi_skoru": kimlik_skoru,
         "kripto_varlik_skoru": kripto_skoru,
         "resmi_kurum_skoru": _kelime_sayisi(metin, RESMI_KURUM_KELIMELERI),
@@ -154,6 +171,15 @@ def acikla(metin):
         nedenler.append("Resmi bir kurum adi kullaniliyor ama link o kuruma ait gorunmuyor.")
     if ozellikler["para_talebi_skoru"] > 0 and not nedenler:
         nedenler.append("Mesaj dogrudan para/havale talep ediyor - tanimadiginiz ya da supheli bir baglamda geldiyse dikkatli olun.")
+
+    # YENI: Rakam icermeyen/argo para talebi TEK BASINA tetiklenirse (baska
+    # hicbir tehdit/link sinyali yoksa) sari seviyeye cekilecek ozel uyari.
+    # Bu uyari nedenler listesinde EN SONDA, digerleriyle celismeyecek sekilde eklenir.
+    if ozellikler["genel_para_talebi"] and not nedenler:
+        nedenler.append(
+            "Bu mesaj tanıdığınız birinden gelse bile hesabı çalınmış olabilir. "
+            "Para göndermeden önce mutlaka kişiyi sesli arayarak teyit edin."
+        )
 
     if not nedenler:
         nedenler.append("Belirgin bir kural tabanli kalip yakalanmadi.")

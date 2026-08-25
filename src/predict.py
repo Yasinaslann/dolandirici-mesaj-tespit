@@ -47,16 +47,33 @@ def tahmin_et(metin, tokenizer=None, model=None):
     kural_ozellikleri = ozellik_cikar(metin)
     nedenler = acikla(metin)
 
+    # ONCELIK SIRASI (en ciddiden en hafife):
+    # 1) Dogrudan tehdit/santaj -> her zaman yuksek_riskli
     if kural_ozellikleri["santaj_tehdit_skoru"] > 0:
         tahmin = "yuksek_riskli"
+
+    # 2) Acik sifre/hesap bilgisi + kripto/link -> yuksek_riskli
     elif kural_ozellikleri["kimlik_bilgisi_skoru"] > 0 and (
         kural_ozellikleri["kripto_varlik_skoru"] > 0 or kural_ozellikleri["link_var"]
     ):
         tahmin = "yuksek_riskli"
+
+    # 3) Kripto varlik + link -> yuksek_riskli
     elif kural_ozellikleri["kripto_varlik_skoru"] > 0 and kural_ozellikleri["link_var"]:
         tahmin = "yuksek_riskli"
+
+    # 4) BERT guvenli dedi ama supheli link/coklu tehdit isareti varsa -> supheli
     elif tahmin == "guvenli" and (kural_ozellikleri["supheli_link"] or kural_ozellikleri["tehdit_skoru"] >= 2):
         tahmin = "supheli"
+
+    # 5) YENI: Sadece rakamsiz/argo para talebi tetiklendiyse (baska HICBIR
+    # ciddi sinyal yoksa) -> supheli + OZEL, net uyari mesaji
+    elif tahmin == "guvenli" and kural_ozellikleri["genel_para_talebi"]:
+        tahmin = "supheli"
+        nedenler = [
+            "Bu mesaj tanıdığınız birinden gelse bile hesabı çalınmış olabilir. "
+            "Para göndermeden önce mutlaka kişiyi sesli arayarak teyit edin."
+        ]
 
     genel_fallback = "Belirgin bir kural tabanli kalip yakalanmadi"
     if tahmin == "guvenli":
