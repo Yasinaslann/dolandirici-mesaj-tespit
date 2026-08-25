@@ -1,17 +1,8 @@
-
-"""
-Kural tabanli feature cikarma modulu.
-"""
-
 import re
 
 TURKCE_HARF_HARITASI = str.maketrans({
-    "ç": "c", "Ç": "c",
-    "ğ": "g", "Ğ": "g",
-    "ı": "i", "İ": "i", "I": "i",
-    "ö": "o", "Ö": "o",
-    "ş": "s", "Ş": "s",
-    "ü": "u", "Ü": "u",
+    "ç": "c", "Ç": "c", "ğ": "g", "Ğ": "g", "ı": "i", "İ": "i", "I": "i",
+    "ö": "o", "Ö": "o", "ş": "s", "Ş": "s", "ü": "u", "Ü": "u",
 })
 
 
@@ -36,8 +27,15 @@ TEHDIT_KELIMELERI = [
 
 SANTAJ_TEHDIT_KELIMELERI = [
     "kacirir", "kacirim", "zarar veririm", "zarar gorursun", "pisman olursun",
-    "basina bir sey gelir", "seni bulurum", "hesabini gorurum", "yoksa gorursun",
-    "param gelmezse", "atmazsan", "vermezsen",
+    "basina bir sey gelir", "seni bulurum", "hesabini gorurum",
+    "param gelmezse", "atmazsan", "vermezsen", "oldur", "santaj",
+    "vururum", "keserim", "kan dokerim", "tehdit ederim", "hapis",
+    "gebert", "bicak", "taciz", "tecavuz", "zorla", "isterse zarar",
+]
+
+ZORLAMA_KOSUL_KELIMELERI = [
+    "gelmezsen", "yapmazsan", "vermezsen", "aramazsan", "cevap vermezsen",
+    "soylemezsen", "gelmez isen", "gelmedigin takdirde",
 ]
 
 PARA_TALEBI_KELIMELERI = [
@@ -75,12 +73,24 @@ def _supheli_link_mi(metin):
     return any(re.search(kalip, metin_kucuk) for kalip in SUPHELI_DOMAIN_KALIPLARI)
 
 
+def _zorlama_kalibi_mi(metin):
+    """'X yapmazsan/gelmezsen ...' gibi kosullu zorlama kaliplarini
+    herhangi bir olumsuz/tehdit ifadesiyle birlikte yakalar."""
+    metin_normalize = _normalize(metin)
+    kosul_var = any(k in metin_normalize for k in ZORLAMA_KOSUL_KELIMELERI)
+    tehdit_var = any(k in metin_normalize for k in SANTAJ_TEHDIT_KELIMELERI)
+    return kosul_var and tehdit_var
+
+
 def ozellik_cikar(metin):
+    santaj_skoru = _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI)
+    if _zorlama_kalibi_mi(metin):
+        santaj_skoru += 1
     return {
         "aciliyet_skoru": _kelime_sayisi(metin, ACILIYET_KELIMELERI),
         "odul_skoru": _kelime_sayisi(metin, ODUL_KELIMELERI),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
-        "santaj_tehdit_skoru": _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI),
+        "santaj_tehdit_skoru": santaj_skoru,
         "para_talebi_skoru": _kelime_sayisi(metin, PARA_TALEBI_KELIMELERI),
         "resmi_kurum_skoru": _kelime_sayisi(metin, RESMI_KURUM_KELIMELERI),
         "akrabalik_skoru": _kelime_sayisi(metin, AKRABALIK_KELIMELERI),
@@ -97,9 +107,9 @@ def acikla(metin):
     if ozellikler["santaj_tehdit_skoru"] > 0 and ozellikler["para_talebi_skoru"] > 0:
         nedenler.append("Dogrudan tehdit icerip karsiliginda para talep ediyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
     elif ozellikler["santaj_tehdit_skoru"] > 0:
-        nedenler.append("Mesajda korkutucu/tehdit edici bir dil kullaniliyor.")
+        nedenler.append("Mesajda korkutucu, zorlayici veya tehdit edici bir dil kullaniliyor. Guvende degilseniz 155 Polis Imdat'i arayin.")
     if ozellikler["aciliyet_skoru"] > 0:
-        nedenler.append("Mesaj sizi aceleye getirmeye calisiyor (ornek: \'hemen\', \'son gun\').")
+        nedenler.append("Mesaj sizi aceleye getirmeye calisiyor (ornek: 'hemen', 'son gun').")
     if ozellikler["odul_skoru"] > 0:
         nedenler.append("Bir odul, hediye ya da kazanc vaat ediyor - bu klasik bir tuzak yontemidir.")
     if ozellikler["tehdit_skoru"] > 0:
@@ -107,7 +117,7 @@ def acikla(metin):
     if ozellikler["supheli_link"]:
         nedenler.append("Icindeki link, resmi kurumlarin kullanmadigi supheli bir adrese benziyor.")
     if ozellikler["akrabalik_skoru"] > 0 and ozellikler["link_var"] == 0:
-        nedenler.append("\'Yeni numaram\', \'telefonum dustu\' gibi ifadeler \'torun/yakin tuzagi\' dolandiriciliginda sik kullanilir.")
+        nedenler.append("'Yeni numaram', 'telefonum dustu' gibi ifadeler 'torun/yakin tuzagi' dolandiriciliginda sik kullanilir.")
     if ozellikler["resmi_kurum_skoru"] > 0 and ozellikler["supheli_link"]:
         nedenler.append("Resmi bir kurum adi kullaniliyor ama link o kuruma ait gorunmuyor.")
     if ozellikler["para_talebi_skoru"] > 0 and not nedenler:
