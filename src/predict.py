@@ -49,6 +49,12 @@ def tahmin_et(metin, tokenizer=None, model=None):
 
     if kural_ozellikleri["santaj_tehdit_skoru"] > 0:
         tahmin = "yuksek_riskli"
+    elif kural_ozellikleri["kimlik_bilgisi_skoru"] > 0 and (
+        kural_ozellikleri["kripto_varlik_skoru"] > 0 or kural_ozellikleri["link_var"]
+    ):
+        tahmin = "yuksek_riskli"
+    elif kural_ozellikleri["kripto_varlik_skoru"] > 0 and kural_ozellikleri["link_var"]:
+        tahmin = "yuksek_riskli"
     elif tahmin == "guvenli" and (kural_ozellikleri["supheli_link"] or kural_ozellikleri["tehdit_skoru"] >= 2):
         tahmin = "supheli"
 

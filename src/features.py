@@ -46,6 +46,16 @@ PARA_TALEBI_KELIMELERI = [
     "para istiyorum",
 ]
 
+# YENI: Kimlik bilgisi / hesap paylasimi ve kripto varlik dolandiriciligi sinyalleri
+KIMLIK_BILGISI_KELIMELERI = [
+    "sifre:", "parola:", "şifre:", "hesap:", "kullanici adi:", "kullanıcı adı:",
+]
+
+KRIPTO_VARLIK_KELIMELERI = [
+    "usdt", "btc", "bitcoin", "kripto", "cuzdan", "wallet", "varliklar",
+    "coin", "binance", "aktarmama yardim", "transfer yardim",
+]
+
 RESMI_KURUM_KELIMELERI = [
     "bddk", "e-devlet", "edevlet", "gib", "ziraat", "halkbank", "vakifbank",
     "is bankasi", "garanti", "ptt", "kargo",
@@ -59,6 +69,7 @@ AKRABALIK_KELIMELERI = [
 SUPHELI_DOMAIN_KALIPLARI = [
     r"bit\.ly", r"tinyurl", r"\.info\b", r"\.xyz\b", r"\.top\b",
     r"-guvenlik\.", r"-odeme\.", r"-tr\.com", r"hizli\.com",
+    r"\b[a-z]{2,6}\d\.com\b",  # kisa+rakamli garip domainler (bur7.com gibi)
 ]
 
 PARA_TALEBI_REGEX = re.compile(r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim)")
@@ -98,12 +109,17 @@ def ozellik_cikar(metin):
     if _para_talebi_regex_mi(metin):
         para_skoru += 1
 
+    kimlik_skoru = _kelime_sayisi(metin, KIMLIK_BILGISI_KELIMELERI)
+    kripto_skoru = _kelime_sayisi(metin, KRIPTO_VARLIK_KELIMELERI)
+
     return {
         "aciliyet_skoru": _kelime_sayisi(metin, ACILIYET_KELIMELERI),
         "odul_skoru": _kelime_sayisi(metin, ODUL_KELIMELERI),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
         "santaj_tehdit_skoru": santaj_skoru,
         "para_talebi_skoru": para_skoru,
+        "kimlik_bilgisi_skoru": kimlik_skoru,
+        "kripto_varlik_skoru": kripto_skoru,
         "resmi_kurum_skoru": _kelime_sayisi(metin, RESMI_KURUM_KELIMELERI),
         "akrabalik_skoru": _kelime_sayisi(metin, AKRABALIK_KELIMELERI),
         "link_var": int(_link_var_mi(metin)),
@@ -120,6 +136,10 @@ def acikla(metin):
         nedenler.append("Dogrudan tehdit icerip karsiliginda para talep ediyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
     elif ozellikler["santaj_tehdit_skoru"] > 0:
         nedenler.append("Mesajda korkutucu, zorlayici veya dogrudan tehdit edici bir dil kullaniliyor. Guvende degilseniz hemen 155 Polis Imdat'i arayin.")
+    if ozellikler["kimlik_bilgisi_skoru"] > 0 and (ozellikler["kripto_varlik_skoru"] > 0 or ozellikler["link_var"]):
+        nedenler.append("Mesajda acik metin sifre/hesap bilgisi ve kripto varlik/link birlikte geciyor - bu genelde ele gecirilmis bir hesaptan gonderilen dolandiricilik mesajidir. Bu bilgilerle hicbir islem yapmayin.")
+    elif ozellikler["kripto_varlik_skoru"] > 0 and ozellikler["link_var"]:
+        nedenler.append("Kripto varlik transferi ve supheli bir link birlikte geciyor - bu tur mesajlar genelde dolandiricilik icerir.")
     if ozellikler["aciliyet_skoru"] > 0:
         nedenler.append("Mesaj sizi aceleye getirmeye calisiyor (ornek: 'hemen', 'son gun').")
     if ozellikler["odul_skoru"] > 0:
