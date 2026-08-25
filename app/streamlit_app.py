@@ -166,6 +166,7 @@ st.markdown("""
         margin-top: 0.55rem;
     }
 
+    /* --- Aksiyon listesi: numarali rozet tasarimi --- */
     .aksiyon-kutu {
         background-color: #151B2B;
         border: 1px solid #232B45;
@@ -178,25 +179,27 @@ st.markdown("""
         color: #F3F4F6;
         font-weight: 700;
         font-size: 0.98rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.1rem;
     }
     .aksiyon-satiri {
         display: flex;
         align-items: center;
-        gap: 0.85rem;
-        padding: 0.55rem 0;
+        gap: 0.9rem;
+        padding: 0.6rem 0;
         border-top: 1px solid #1E2540;
     }
     .aksiyon-satiri:first-of-type { border-top: none; }
-    .aksiyon-ikon-daire {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background-color: #1E2540;
+    .aksiyon-numara {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #6366F1, #4F46E5);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #E0E3FF;
         flex-shrink: 0;
     }
     .aksiyon-metin {
@@ -445,23 +448,23 @@ if analiz_butonu:
             <div class="aksiyon-kutu">
                 <div class="aksiyon-baslik">Şimdi Ne Yapmalısınız?</div>
                 <div class="aksiyon-satiri">
-                    <div class="aksiyon-ikon-daire">🔗</div>
+                    <div class="aksiyon-numara">01</div>
                     <div class="aksiyon-metin">Mesajdaki linke <strong>kesinlikle tıklamayın</strong></div>
                 </div>
                 <div class="aksiyon-satiri">
-                    <div class="aksiyon-ikon-daire">🔒</div>
+                    <div class="aksiyon-numara">02</div>
                     <div class="aksiyon-metin">Kişisel bilgi ya da para <strong>paylaşmayın</strong></div>
                 </div>
                 <div class="aksiyon-satiri">
-                    <div class="aksiyon-ikon-daire">📞</div>
+                    <div class="aksiyon-numara">03</div>
                     <div class="aksiyon-metin">Şüpheliyseniz kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div>
                 </div>
                 <div class="aksiyon-satiri">
-                    <div class="aksiyon-ikon-daire">🚨</div>
+                    <div class="aksiyon-numara">04</div>
                     <div class="aksiyon-metin">Tehdit/şantaj içeriyorsa hemen <strong>155 Polis İmdat</strong>'ı arayın</div>
                 </div>
                 <div class="aksiyon-satiri">
-                    <div class="aksiyon-ikon-daire">👨‍👩‍👧</div>
+                    <div class="aksiyon-numara">05</div>
                     <div class="aksiyon-metin">Emin değilseniz, teknolojiye yakın bir yakınınıza danışın</div>
                 </div>
             </div>
