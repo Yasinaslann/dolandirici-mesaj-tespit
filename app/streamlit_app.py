@@ -2,21 +2,21 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-# src klasörünü sisteme tanıt
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
 
-from src.predict import load_model, predict_message
+from src.predict import load_model, tahmin_et
 
 st.set_page_config(page_title="Dolandırıcı Mesaj Tespit", page_icon="🛡️")
 
 st.title("🛡️ Dolandırıcı Mesaj Tespit Asistanı")
 st.markdown("Şüphelendiğiniz mesajı aşağıya yapıştırın, **Yapay Zeka (BERT)** sizin için analiz etsin.")
 
-# Modeli Streamlit'in önbelleğine (cache) alıyoruz (Sadece 1 kere indirilecek)
+
 @st.cache_resource(show_spinner="Yapay zeka modeli yükleniyor... Lütfen bekleyin.")
 def get_model():
     return load_model()
+
 
 try:
     tokenizer, model = get_model()
@@ -31,12 +31,42 @@ if st.button("Mesajı Analiz Et", type="primary"):
         st.warning("Lütfen analiz edilecek bir mesaj girin.")
     else:
         with st.spinner("Yapay zeka bağlamı inceliyor..."):
-            sonuc = predict_message(mesaj, tokenizer, model)
-            
+            sonuc = tahmin_et(mesaj, tokenizer, model)
+
         st.markdown("---")
-        if sonuc == "yuksek_riskli":
-            st.error("🚨 **YÜKSEK RİSKLİ MESAJ!** \n\nBu mesaj belirgin dolandırıcılık kalıpları (korku, aciliyet, sahte link vb.) içeriyor. **Lütfen içindeki linklere tıklamayın ve kişisel bilgilerinizi paylaşmayın.**")
-        elif sonuc == "supheli":
-            st.warning("⚠️ **ŞÜPHELİ MESAJ** \n\nBu mesajda şüpheli unsurlar (bedava kazanç, iş vaadi vb.) tespit edildi. Doğruluğundan emin olmadığınız sürece etkileşime girmeyin.")
+        risk = sonuc["risk_seviyesi"]
+        emoji = sonuc["emoji"]
+        baslik = sonuc["baslik"]
+
+        if risk == "yuksek_riskli":
+            st.error(f"{emoji} **{baslik}**")
+        elif risk == "supheli":
+            st.warning(f"{emoji} **{baslik}**")
         else:
-            st.success("✅ **GÜVENLİ GÖRÜNÜYOR** \n\nMesajda yapay zeka tarafından dolandırıcılık veya risk unsuru tespit edilmedi. Yine de normal güvenlik tedbirlerinizi elden bırakmayın.")
+            st.success(f"{emoji} **{baslik}**")
+
+        st.subheader("Neden bu sonucu aldık?")
+        for neden in sonuc["nedenler"]:
+            st.markdown(f"- {neden}")
+
+        if risk in ("yuksek_riskli", "supheli"):
+            st.info(
+                "**Ne yapmalısınız?**\n\n"
+                "- Mesajdaki linke **tıklamayın**\n"
+                "- Kişisel bilgi ya da para göndermeyin\n"
+                "- Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın\n"
+                "- Tehdit/şantaj içeriyorsa **155 Polis İmdat**'ı arayın\n"
+                "- Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın"
+            )
+
+        with st.expander("Teknik detaylar (opsiyonel)"):
+            st.write("Model olasılık dağılımı:")
+            st.json({k: round(float(v), 3) for k, v in sonuc["olasiliklar"].items()})
+            st.write("Kural tabanlı sinyal skorları:")
+            st.json(sonuc["kural_skorlari"])
+
+st.divider()
+st.caption(
+    "⚠️ Bu araç bir yardımcı sistemdir, kesin doğruluk garanti etmez. "
+    "Şüphe durumunda her zaman ilgili kurumu resmi kanallardan doğrulayın."
+)
