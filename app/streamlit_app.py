@@ -167,7 +167,7 @@ st.markdown("""
 <div class="baslik-kutu">
     <div class="baslik-ikon">🛡️</div>
     <h1>Dolandırıcı Mesaj Tespit Asistanı</h1>
-    <p>Yapay zeka destekli güvenlik katmanı · Ebeveynler için tasarlandı</p>
+    <p>Yapay zeka destekli güvenlik katmanı&nbsp;&nbsp;·&nbsp;&nbsp;Ebeveynler için tasarlandı</p>
 </div>
 """, unsafe_allow_html=True)
 
