@@ -58,21 +58,11 @@ st.markdown("""
         font-weight: 700;
         margin-bottom: 0.3rem;
     }
-    .uyari-kutu {
-        background-color: #1E1B12;
-        border: 1px solid #78350F;
-        border-radius: 10px;
-        padding: 1rem 1.2rem;
-        margin: 1.5rem 0;
-        color: #FCD34D;
-        font-size: 0.88rem;
-        line-height: 1.5;
-    }
     .footer-not {
         text-align: center;
         color: #64748B;
-        font-size: 0.8rem;
-        margin-top: 2rem;
+        font-size: 0.75rem;
+        margin-top: 2.5rem;
         padding-top: 1rem;
         border-top: 1px solid #1E293B;
     }
@@ -88,18 +78,6 @@ st.markdown("""
 <div class="baslik-kutu">
     <h1>🛡️ Dolandırıcı Mesaj Tespit Asistanı</h1>
     <p>Yapay zeka destekli, ebeveynler için güvenlik katmanı</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="uyari-kutu">
-⚠️ <strong>Bu araç size yardımcı olur, ama yerinizi almaz.</strong><br><br>
-Yapay zeka sistemi bilinen dolandırıcılık kalıplarını (sahte kargo, banka uyarısı,
-tehdit/şantaj, torun tuzağı vb.) tanımak için eğitildi. Ancak dolandırıcılar sürekli
-yeni yöntemler icat ediyor ve sistem <strong>her zaman</strong> doğru sonuç vermeyebilir.<br><br>
-"Güvenli" sonucu, o mesajın <em>bilinen</em> hiçbir dolandırıcılık kalıbına uymadığı
-anlamına gelir — <strong>garanti değildir.</strong> Şüpheniz devam ediyorsa, ilgilendiğiniz
-kişi/kurumu her zaman <strong>resmi bir kanaldan</strong> (telefon, resmi web sitesi) ayrıca doğrulayın.
 </div>
 """, unsafe_allow_html=True)
 
@@ -180,9 +158,6 @@ if analiz_butonu:
         </div>
         """, unsafe_allow_html=True)
 
-        if risk == "guvenli":
-            st.caption("💡 Hatırlatma: 'Güvenli' sonucu, bilinen kalıplara uymadığı anlamına gelir, kesin garanti değildir. İçgüdüleriniz size farklı bir şey söylüyorsa, yine de dikkatli olun.")
-
         if risk in ("yuksek_riskli", "supheli"):
             st.info(
                 "**Ne yapmalısınız?**\n\n"
@@ -193,15 +168,8 @@ if analiz_butonu:
                 "- Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın"
             )
 
-        with st.expander("Teknik detaylar (opsiyonel)"):
-            st.write("Model olasılık dağılımı:")
-            st.json({k: round(float(v), 3) for k, v in sonuc["olasiliklar"].items()})
-            st.write("Kural tabanlı sinyal skorları:")
-            st.json(sonuc["kural_skorlari"])
-
 st.markdown("""
 <div class="footer-not">
-    ⚠️ Bu araç bir yardımcı sistemdir, kesin doğruluk garanti etmez.<br>
-    Şüphe durumunda her zaman ilgili kurumu resmi kanallardan doğrulayın.
+    Bu araç kesin doğruluk garanti etmez, sağduyunuzu her zaman kullanın.
 </div>
 """, unsafe_allow_html=True)
