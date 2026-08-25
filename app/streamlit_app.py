@@ -16,69 +16,89 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .stApp {
-        background-color: #FFFFFF;
-    }
+    .stApp { background-color: #FFFFFF; }
+
     .baslik-kutu {
         text-align: center;
-        padding: 2.5rem 1rem 2rem 1rem;
+        padding: 2.2rem 1rem 1.8rem 1rem;
     }
     .baslik-kutu h1 {
-        font-size: 1.9rem;
-        font-weight: 600;
-        color: #37352F;
-        margin-bottom: 0.4rem;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #1E1B2E;
+        margin-bottom: 0.3rem;
     }
     .baslik-kutu p {
-        color: #9B9A97;
-        font-size: 0.95rem;
+        color: #8B8A99;
+        font-size: 0.9rem;
     }
-    .sonuc-kart {
+
+    .rozet-alan {
+        text-align: center;
+        padding: 1.5rem 0 0.5rem 0;
+    }
+    .rozet {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 1.8rem;
+        border-radius: 999px;
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+    .rozet-yuksek { background-color: #FEE2E2; color: #B91C1C; }
+    .rozet-supheli { background-color: #FEF3C7; color: #B45309; }
+    .rozet-guvenli { background-color: #D1FAE5; color: #047857; }
+
+    .etiket-alan {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 1.2rem 0;
+    }
+    .etiket {
+        background-color: #F5F5FF;
+        color: #4F46E5;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        max-width: 100%;
+    }
+
+    .aksiyon-kutu {
+        background-color: #F9FAFB;
         border-radius: 14px;
-        padding: 1.6rem;
-        margin: 1.2rem 0;
+        padding: 1.2rem 1.4rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #374151;
     }
-    .sonuc-yuksek {
-        background-color: #FDECEC;
-    }
-    .sonuc-supheli {
-        background-color: #FBF3DB;
-    }
-    .sonuc-guvenli {
-        background-color: #E9F3EC;
-    }
-    .sonuc-baslik {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #37352F;
-    }
-    .sonuc-nedenler {
-        color: #5F5E5B;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
+
     .footer-not {
         text-align: center;
-        color: #B4B3AF;
-        font-size: 0.78rem;
+        color: #C4C3CC;
+        font-size: 0.75rem;
         margin-top: 3rem;
         padding-top: 1.2rem;
-        border-top: 1px solid #F0EFEC;
+        border-top: 1px solid #F0F0F5;
     }
+
     div[data-testid="stFileUploader"] {
-        border: 1.5px dashed #E3E2DF;
+        border: 1.5px dashed #DDDCE8;
         border-radius: 14px;
         padding: 1rem;
-        background-color: #FBFBFA;
+        background-color: #FAFAFF;
     }
     .stButton button {
-        border-radius: 10px;
-        font-weight: 500;
+        border-radius: 12px;
+        font-weight: 600;
+        padding: 0.6rem 0;
     }
     .stTextArea textarea {
-        border-radius: 10px;
-        border: 1.5px solid #E3E2DF;
+        border-radius: 12px;
+        border: 1.5px solid #E5E4EE;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -148,34 +168,32 @@ if analiz_butonu:
         emoji = sonuc["emoji"]
         baslik = sonuc["baslik"]
 
-        sinif_haritasi = {
-            "yuksek_riskli": "sonuc-yuksek",
-            "supheli": "sonuc-supheli",
-            "guvenli": "sonuc-guvenli",
-        }
-        css_sinifi = sinif_haritasi.get(risk, "sonuc-supheli")
-
-        nedenler_html = "".join(f"<li>{n}</li>" for n in sonuc["nedenler"])
+        rozet_sinifi = {
+            "yuksek_riskli": "rozet-yuksek",
+            "supheli": "rozet-supheli",
+            "guvenli": "rozet-guvenli",
+        }.get(risk, "rozet-supheli")
 
         st.markdown(f"""
-        <div class="sonuc-kart {css_sinifi}">
-            <div class="sonuc-baslik">{emoji} {baslik}</div>
-            <div class="sonuc-nedenler">
-                <strong>Neden bu sonucu aldık?</strong>
-                <ul style="margin-top:0.5rem;">{nedenler_html}</ul>
-            </div>
+        <div class="rozet-alan">
+            <div class="rozet {rozet_sinifi}">{emoji} {baslik}</div>
         </div>
         """, unsafe_allow_html=True)
 
+        etiketler_html = "".join(f'<span class="etiket">{n}</span>' for n in sonuc["nedenler"])
+        st.markdown(f'<div class="etiket-alan">{etiketler_html}</div>', unsafe_allow_html=True)
+
         if risk in ("yuksek_riskli", "supheli"):
-            st.info(
-                "**Ne yapmalısınız?**\n\n"
-                "- Mesajdaki linke **tıklamayın**\n"
-                "- Kişisel bilgi ya da para göndermeyin\n"
-                "- Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın\n"
-                "- Tehdit/şantaj içeriyorsa **155 Polis İmdat**'ı arayın\n"
-                "- Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın"
-            )
+            st.markdown("""
+            <div class="aksiyon-kutu">
+                <strong>Ne yapmalısınız?</strong><br><br>
+                • Mesajdaki linke <strong>tıklamayın</strong><br>
+                • Kişisel bilgi ya da para göndermeyin<br>
+                • Şüpheliyseniz ilgili kurumu resmi telefon numarasından arayıp doğrulayın<br>
+                • Tehdit/şantaj içeriyorsa <strong>155 Polis İmdat</strong>'ı arayın<br>
+                • Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın
+            </div>
+            """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer-not">
