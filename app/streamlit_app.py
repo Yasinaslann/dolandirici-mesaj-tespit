@@ -17,59 +17,68 @@ st.set_page_config(
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
+        background-color: #FFFFFF;
     }
     .baslik-kutu {
         text-align: center;
-        padding: 2rem 1rem 1.5rem 1rem;
-        border-bottom: 1px solid #1E293B;
-        margin-bottom: 1.5rem;
+        padding: 2.5rem 1rem 2rem 1rem;
     }
     .baslik-kutu h1 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #F1F5F9;
-        margin-bottom: 0.3rem;
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: #37352F;
+        margin-bottom: 0.4rem;
     }
     .baslik-kutu p {
-        color: #94A3B8;
+        color: #9B9A97;
         font-size: 0.95rem;
     }
     .sonuc-kart {
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        border-left: 5px solid;
+        border-radius: 14px;
+        padding: 1.6rem;
+        margin: 1.2rem 0;
     }
     .sonuc-yuksek {
-        background-color: #2A1215;
-        border-left-color: #EF4444;
+        background-color: #FDECEC;
     }
     .sonuc-supheli {
-        background-color: #2A2312;
-        border-left-color: #F59E0B;
+        background-color: #FBF3DB;
     }
     .sonuc-guvenli {
-        background-color: #12241A;
-        border-left-color: #22C55E;
+        background-color: #E9F3EC;
     }
     .sonuc-baslik {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 0.3rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #37352F;
+    }
+    .sonuc-nedenler {
+        color: #5F5E5B;
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     .footer-not {
         text-align: center;
-        color: #64748B;
-        font-size: 0.75rem;
-        margin-top: 2.5rem;
-        padding-top: 1rem;
-        border-top: 1px solid #1E293B;
+        color: #B4B3AF;
+        font-size: 0.78rem;
+        margin-top: 3rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid #F0EFEC;
     }
     div[data-testid="stFileUploader"] {
-        border: 1px dashed #334155;
+        border: 1.5px dashed #E3E2DF;
+        border-radius: 14px;
+        padding: 1rem;
+        background-color: #FBFBFA;
+    }
+    .stButton button {
         border-radius: 10px;
-        padding: 0.5rem;
+        font-weight: 500;
+    }
+    .stTextArea textarea {
+        border-radius: 10px;
+        border: 1.5px solid #E3E2DF;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -151,7 +160,7 @@ if analiz_butonu:
         st.markdown(f"""
         <div class="sonuc-kart {css_sinifi}">
             <div class="sonuc-baslik">{emoji} {baslik}</div>
-            <div style="color:#CBD5E1; margin-top:0.8rem;">
+            <div class="sonuc-nedenler">
                 <strong>Neden bu sonucu aldık?</strong>
                 <ul style="margin-top:0.5rem;">{nedenler_html}</ul>
             </div>
