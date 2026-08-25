@@ -16,7 +16,7 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .stApp { background-color: #FFFFFF; }
+    .stApp { background-color: #EEF2FF; }
 
     .baslik-kutu {
         text-align: center;
@@ -29,8 +29,15 @@ st.markdown("""
         margin-bottom: 0.3rem;
     }
     .baslik-kutu p {
-        color: #8B8A99;
+        color: #6B6980;
         font-size: 0.9rem;
+    }
+
+    .ana-panel {
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        padding: 1.8rem;
+        box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
     }
 
     .rozet-alan {
@@ -58,7 +65,7 @@ st.markdown("""
         padding: 1.2rem 0;
     }
     .etiket {
-        background-color: #F5F5FF;
+        background-color: #EEF2FF;
         color: #4F46E5;
         padding: 0.5rem 1rem;
         border-radius: 10px;
@@ -78,18 +85,17 @@ st.markdown("""
 
     .footer-not {
         text-align: center;
-        color: #C4C3CC;
+        color: #9694A8;
         font-size: 0.75rem;
-        margin-top: 3rem;
+        margin-top: 2.5rem;
         padding-top: 1.2rem;
-        border-top: 1px solid #F0F0F5;
     }
 
     div[data-testid="stFileUploader"] {
-        border: 1.5px dashed #DDDCE8;
+        border: 1.5px dashed #C7D2FE;
         border-radius: 14px;
         padding: 1rem;
-        background-color: #FAFAFF;
+        background-color: #F5F7FF;
     }
     .stButton button {
         border-radius: 12px;
@@ -98,7 +104,7 @@ st.markdown("""
     }
     .stTextArea textarea {
         border-radius: 12px;
-        border: 1.5px solid #E5E4EE;
+        border: 1.5px solid #E0E4FA;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -109,6 +115,8 @@ st.markdown("""
     <p>Yapay zeka destekli, ebeveynler için güvenlik katmanı</p>
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown('<div class="ana-panel">', unsafe_allow_html=True)
 
 
 @st.cache_resource(show_spinner="Yapay zeka modeli yükleniyor... Lütfen bekleyin.")
@@ -194,6 +202,8 @@ if analiz_butonu:
                 • Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın
             </div>
             """, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer-not">
