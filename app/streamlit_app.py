@@ -1,6 +1,7 @@
 import streamlit as st
 import sys
 from pathlib import Path
+from datetime import datetime
 from PIL import Image
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +21,19 @@ st.markdown("""
         background: radial-gradient(circle at 20% 0%, #1A1F35 0%, #0B0F19 55%);
     }
 
+    @keyframes yumusakGiris {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     .baslik-kutu {
         text-align: center;
-        padding: 2.5rem 1rem 2rem 1rem;
+        padding: 2.5rem 1rem 1.8rem 1rem;
     }
     .baslik-ikon {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         margin-bottom: 0.4rem;
+        filter: drop-shadow(0 4px 12px rgba(129, 140, 248, 0.35));
     }
     .baslik-kutu h1 {
         font-size: 1.7rem;
@@ -46,13 +53,50 @@ st.markdown("""
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin: 1.5rem 0 0.6rem 0;
+        margin: 1.6rem 0 0.7rem 0;
     }
 
+    /* --- Istatistik seridi --- */
+    .istatistik-serit {
+        display: flex;
+        gap: 0.7rem;
+        margin: 0.5rem 0 1.5rem 0;
+    }
+    .istatistik-kutu {
+        flex: 1;
+        background-color: #12172A;
+        border: 1px solid #1F2740;
+        border-radius: 14px;
+        padding: 0.9rem 0.6rem;
+        text-align: center;
+        transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .istatistik-kutu:hover {
+        transform: translateY(-2px);
+        border-color: #3A4368;
+    }
+    .istatistik-sayi {
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    .istatistik-etiket {
+        font-size: 0.72rem;
+        color: #7C8397;
+        margin-top: 0.15rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    .sayi-yuksek { color: #F87171; }
+    .sayi-supheli { color: #FBBF24; }
+    .sayi-guvenli { color: #4ADE80; }
+
+    /* --- Sonuc karti --- */
     .sonuc-cerceve {
-        margin-top: 2rem;
+        margin-top: 1.6rem;
         border-radius: 20px;
         padding: 2px;
+        animation: yumusakGiris 0.45s ease-out;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
     }
     .sonuc-cerceve.cerceve-yuksek { background: linear-gradient(135deg, #EF4444, #7F1D1D); }
     .sonuc-cerceve.cerceve-supheli { background: linear-gradient(135deg, #F59E0B, #78350F); }
@@ -61,48 +105,49 @@ st.markdown("""
     .sonuc-ic {
         background-color: #12172A;
         border-radius: 18px;
-        padding: 1.8rem;
+        padding: 1.9rem;
     }
 
     .sonuc-ust {
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.3rem;
     }
     .sonuc-daire {
-        width: 56px;
-        height: 56px;
+        width: 58px;
+        height: 58px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.6rem;
+        font-size: 1.7rem;
         flex-shrink: 0;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
     }
     .daire-yuksek { background-color: #3A1518; }
     .daire-supheli { background-color: #3A2E10; }
     .daire-guvenli { background-color: #103A22; }
 
     .sonuc-baslik-metin {
-        font-size: 1.25rem;
+        font-size: 1.28rem;
         font-weight: 700;
         color: #F9FAFB;
     }
     .sonuc-alt-metin {
         color: #7C8397;
         font-size: 0.82rem;
-        margin-top: 0.1rem;
+        margin-top: 0.15rem;
     }
 
     .neden-satiri {
         display: flex;
         gap: 0.7rem;
-        padding: 0.65rem 0;
+        padding: 0.7rem 0;
         border-top: 1px solid #1F2740;
         color: #D1D5DB;
         font-size: 0.9rem;
-        line-height: 1.5;
+        line-height: 1.55;
     }
     .neden-satiri:first-of-type { border-top: none; }
     .neden-ikon { color: #818CF8; flex-shrink: 0; }
@@ -113,6 +158,7 @@ st.markdown("""
         border-radius: 16px;
         padding: 1.3rem 1.5rem;
         margin-top: 1.3rem;
+        animation: yumusakGiris 0.5s ease-out;
     }
     .aksiyon-baslik {
         color: #F3F4F6;
@@ -129,7 +175,41 @@ st.markdown("""
         padding: 0.4rem 0;
         line-height: 1.5;
     }
-    .aksiyon-satiri .ikon {
+    .aksiyon-satiri .ikon { flex-shrink: 0; }
+
+    /* --- Gecmis sorgular --- */
+    .gecmis-satiri {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 10px;
+        margin-bottom: 0.4rem;
+        background-color: #12172A;
+        border: 1px solid #1B2338;
+        font-size: 0.85rem;
+        transition: border-color 0.15s ease;
+    }
+    .gecmis-satiri:hover { border-color: #2E3757; }
+    .gecmis-nokta {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .nokta-yuksek { background-color: #EF4444; }
+    .nokta-supheli { background-color: #F59E0B; }
+    .nokta-guvenli { background-color: #22C55E; }
+    .gecmis-mesaj {
+        color: #C7CBDA;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .gecmis-saat {
+        color: #565E77;
+        font-size: 0.75rem;
         flex-shrink: 0;
     }
 
@@ -154,6 +234,11 @@ st.markdown("""
         padding: 0.65rem 0;
         border: none;
         background: linear-gradient(135deg, #818CF8, #6366F1);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .stButton button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
     }
     .stTextArea textarea {
         border-radius: 14px;
@@ -188,6 +273,38 @@ try:
 except Exception as e:
     st.error(f"Model yüklenirken bir hata oluştu: {e}")
     st.stop()
+
+# --- Oturum gecmisini baslat ---
+if "gecmis" not in st.session_state:
+    st.session_state.gecmis = []
+
+# --- Istatistik seridi (gecmis varsa goster) ---
+if st.session_state.gecmis:
+    toplam = len(st.session_state.gecmis)
+    yuksek_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "yuksek_riskli")
+    supheli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "supheli")
+    guvenli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "guvenli")
+
+    st.markdown(f"""
+    <div class="istatistik-serit">
+        <div class="istatistik-kutu">
+            <div class="istatistik-sayi">{toplam}</div>
+            <div class="istatistik-etiket">Toplam Kontrol</div>
+        </div>
+        <div class="istatistik-kutu">
+            <div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div>
+            <div class="istatistik-etiket">Yüksek Riskli</div>
+        </div>
+        <div class="istatistik-kutu">
+            <div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div>
+            <div class="istatistik-etiket">Şüpheli</div>
+        </div>
+        <div class="istatistik-kutu">
+            <div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div>
+            <div class="istatistik-etiket">Güvenli</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown('<div class="bolum-baslik">Mesajı Ekleyin</div>', unsafe_allow_html=True)
 
@@ -232,6 +349,14 @@ if analiz_butonu:
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
         baslik = sonuc["baslik"]
+
+        # Gecmise ekle (en yeni en ustte olacak sekilde)
+        st.session_state.gecmis.insert(0, {
+            "mesaj": mesaj[:60] + ("..." if len(mesaj) > 60 else ""),
+            "risk": risk,
+            "saat": datetime.now().strftime("%H:%M"),
+        })
+        st.session_state.gecmis = st.session_state.gecmis[:10]  # son 10 ile sinirla
 
         cerceve_sinif = {
             "yuksek_riskli": "cerceve-yuksek",
@@ -282,6 +407,32 @@ if analiz_butonu:
                 <div class="aksiyon-satiri"><span class="ikon">👨‍👩‍👧</span><span>Yakınınızdan bir teknoloji konusunda daha bilgili birine danışın</span></div>
             </div>
             """, unsafe_allow_html=True)
+
+# --- Gecmis sorgular bolumu ---
+if st.session_state.gecmis:
+    st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
+
+    nokta_sinif_haritasi = {
+        "yuksek_riskli": "nokta-yuksek",
+        "supheli": "nokta-supheli",
+        "guvenli": "nokta-guvenli",
+    }
+
+    gecmis_html = ""
+    for kayit in st.session_state.gecmis:
+        nokta_sinif = nokta_sinif_haritasi.get(kayit["risk"], "nokta-supheli")
+        gecmis_html += f"""
+        <div class="gecmis-satiri">
+            <div class="gecmis-nokta {nokta_sinif}"></div>
+            <div class="gecmis-mesaj">{kayit['mesaj']}</div>
+            <div class="gecmis-saat">{kayit['saat']}</div>
+        </div>
+        """
+    st.markdown(gecmis_html, unsafe_allow_html=True)
+
+    if st.button("Geçmişi temizle", use_container_width=True):
+        st.session_state.gecmis = []
+        st.rerun()
 
 st.markdown("""
 <div class="footer-not">
