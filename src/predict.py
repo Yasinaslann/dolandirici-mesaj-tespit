@@ -59,8 +59,6 @@ def tahmin_et(metin, tokenizer=None, model=None):
         tahmin = "yuksek_riskli"
     elif kural_ozellikleri["kripto_varlik_skoru"] > 0 and kural_ozellikleri["link_var"]:
         tahmin = "yuksek_riskli"
-    # Akrabalik tuzagi + para talebi: BERT ne derse desin, bu kombinasyon
-    # KOSULSUZ yuksek_riskli'dir - "guvenli" dese bile artik kisitlama yok.
     elif kural_ozellikleri["akrabalik_skoru"] > 0 and (
         kural_ozellikleri["para_talebi_skoru"] > 0 or kural_ozellikleri["genel_para_talebi"]
     ):
@@ -75,6 +73,12 @@ def tahmin_et(metin, tokenizer=None, model=None):
             "Bu mesaj tanıdığınız birinden gelse bile hesabı çalınmış olabilir. "
             "Para göndermeden önce mutlaka kişiyi sesli arayarak teyit edin."
         ]
+    # YENI: odul/kampanya kelimeleri (indirim, firsat, hediye vb.) tek basina
+    # bile BERT "guvenli" dese, en azindan "supheli"ye cekiyoruz - reklam
+    # olabilir ama klasik sahte odul tuzaklarinin da ayni kaliplari kullandigini
+    # unutmayalim.
+    elif tahmin == "guvenli" and kural_ozellikleri["odul_skoru"] > 0:
+        tahmin = "supheli"
 
     genel_fallback = "Belirgin bir kural tabanli kalip yakalanmadi"
     if tahmin == "guvenli":
