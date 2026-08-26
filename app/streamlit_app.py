@@ -1,5 +1,6 @@
 import streamlit as st
 import sys
+import time
 from pathlib import Path
 from datetime import datetime
 from PIL import Image
@@ -322,33 +323,21 @@ except Exception as e:
 if "gecmis" not in st.session_state:
     st.session_state.gecmis = []
 
-# İstatistik Şeridi
 if st.session_state.gecmis:
     toplam = len(st.session_state.gecmis)
     yuksek_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "yuksek_riskli")
     supheli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "supheli")
     guvenli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "guvenli")
 
-    st.markdown(f"""
-    <div class="istatistik-serit">
-        <div class="istatistik-kutu">
-            <div class="istatistik-sayi">{toplam}</div>
-            <div class="istatistik-etiket">Toplam Kontrol</div>
-        </div>
-        <div class="istatistik-kutu">
-            <div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div>
-            <div class="istatistik-etiket">Yüksek Riskli</div>
-        </div>
-        <div class="istatistik-kutu">
-            <div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div>
-            <div class="istatistik-etiket">Şüpheli</div>
-        </div>
-        <div class="istatistik-kutu">
-            <div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div>
-            <div class="istatistik-etiket">Güvenli</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="istatistik-serit">'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi">{toplam}</div><div class="istatistik-etiket">Toplam Kontrol</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div><div class="istatistik-etiket">Yüksek Riskli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div><div class="istatistik-etiket">Şüpheli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div><div class="istatistik-etiket">Güvenli</div></div>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
 
 st.markdown('<div class="bolum-baslik">Mesajı Ekleyin</div>', unsafe_allow_html=True)
 
@@ -393,10 +382,8 @@ if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
     else:
-        # Şık st.status akışı eklendi
         with st.status("🛡️ Güvenlik kalkanı çalıştırılıyor...", expanded=True) as status:
             st.write("🔍 Metin ayıklanıyor ve taranıyor...")
-            import time
             time.sleep(0.3)
             st.write("🤖 BERT Yapay Zeka modeli bağlamı inceliyor...")
             time.sleep(0.3)
@@ -409,7 +396,6 @@ if analiz_butonu:
         emoji = sonuc["emoji"]
         baslik = sonuc["baslik"]
 
-        # Geçmişe kaydet
         st.session_state.gecmis.insert(0, {
             "mesaj": mesaj[:55] + ("..." if len(mesaj) > 55 else ""),
             "risk": risk,
@@ -440,50 +426,39 @@ if analiz_butonu:
             for n in sonuc["nedenler"]
         )
 
-        st.markdown(f"""
-        <div class="sonuc-cerceve {cerceve_sinif}">
-            <div class="sonuc-ic">
-                <div class="sonuc-ust">
-                    <div class="sonuc-daire {daire_sinif}">{emoji}</div>
-                    <div>
-                        <div class="sonuc-baslik-metin">{baslik}</div>
-                        <div class="sonuc-alt-metin">{alt_metin}</div>
-                    </div>
-                </div>
-                <div class="neden-baslik">Değerlendirme Gerekçesi</div>
-                {nedenler_html}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="sonuc-cerceve {cerceve_sinif}">'
+            f'<div class="sonuc-ic">'
+            f'<div class="sonuc-ust">'
+            f'<div class="sonuc-daire {daire_sinif}">{emoji}</div>'
+            f'<div><div class="sonuc-baslik-metin">{baslik}</div>'
+            f'<div class="sonuc-alt-metin">{alt_metin}</div></div>'
+            f'</div>'
+            f'<div class="neden-baslik">Değerlendirme Gerekçesi</div>'
+            f'{nedenler_html}'
+            f'</div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
 
         if risk in ("yuksek_riskli", "supheli"):
-            st.markdown("""
-            <div class="aksiyon-kutu">
-                <div class="aksiyon-baslik">🚨 Şimdi Ne Yapmalısınız?</div>
-                <div class="aksiyon-satiri">
-                    <div class="aksiyon-numara">01</div>
-                    <div class="aksiyon-metin">Mesajdaki linke veya ek dosyaya <strong>kesinlikle tıklamayın</strong></div>
-                </div>
-                <div class="aksiyon-satiri">
-                    <div class="aksiyon-numara">02</div>
-                    <div class="aksiyon-metin">Kişisel bilgi, şifre ya da para <strong>paylaşmayın</strong></div>
-                </div>
-                <div class="aksiyon-satiri">
-                    <div class="aksiyon-numara">03</div>
-                    <div class="aksiyon-metin">Şüpheliyseniz ilgili kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div>
-                </div>
-                <div class="aksiyon-satiri">
-                    <div class="aksiyon-numara">04</div>
-                    <div class="aksiyon-metin">Tehdit/şantaj içeriyorsa hemen <strong>155 Polis İmdat</strong>'ı arayın</div>
-                </div>
-                <div class="aksiyon-satiri">
-                    <div class="aksiyon-numara">05</div>
-                    <div class="aksiyon-metin">Tanıdığınızdan gelse bile hesabı çalınmış olabilir, sesli arayarak teyit edin</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                '<div class="aksiyon-kutu">'
+                '<div class="aksiyon-baslik">🚨 Şimdi Ne Yapmalısınız?</div>'
+                '<div class="aksiyon-satiri"><div class="aksiyon-numara">01</div>'
+                '<div class="aksiyon-metin">Mesajdaki linke veya ek dosyaya <strong>kesinlikle tıklamayın</strong></div></div>'
+                '<div class="aksiyon-satiri"><div class="aksiyon-numara">02</div>'
+                '<div class="aksiyon-metin">Kişisel bilgi, şifre ya da para <strong>paylaşmayın</strong></div></div>'
+                '<div class="aksiyon-satiri"><div class="aksiyon-numara">03</div>'
+                '<div class="aksiyon-metin">Şüpheliyseniz ilgili kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div></div>'
+                '<div class="aksiyon-satiri"><div class="aksiyon-numara">04</div>'
+                '<div class="aksiyon-metin">Tehdit/şantaj içeriyorsa hemen <strong>155 Polis İmdat</strong>\'ı arayın</div></div>'
+                '<div class="aksiyon-satiri"><div class="aksiyon-numara">05</div>'
+                '<div class="aksiyon-metin">Tanıdığınızdan gelse bile hesabı çalınmış olabilir, sesli arayarak teyit edin</div></div>'
+                '</div>',
+                unsafe_allow_html=True,
+            )
 
-# Oturum Geçmişi Bölümü
 if st.session_state.gecmis:
     st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
 
@@ -503,14 +478,14 @@ if st.session_state.gecmis:
         nokta_sinif = nokta_sinif_haritasi.get(kayit["risk"], "nokta-supheli")
         etiket_sinif = etiket_sinif_haritasi.get(kayit["risk"], "etiket-supheli")
         etiket_metni = ETIKET_METNI.get(kayit["risk"], "Bilinmiyor")
-        gecmis_html += f"""
-        <div class="gecmis-satiri">
-            <div class="gecmis-nokta {nokta_sinif}"></div>
-            <div class="gecmis-mesaj">{kayit['mesaj']}</div>
-            <div class="gecmis-etiket {etiket_sinif}">{etiket_metni}</div>
-            <div class="gecmis-saat">{kayit['saat']}</div>
-        </div>
-        """
+        gecmis_html += (
+            f'<div class="gecmis-satiri">'
+            f'<div class="gecmis-nokta {nokta_sinif}"></div>'
+            f'<div class="gecmis-mesaj">{kayit["mesaj"]}</div>'
+            f'<div class="gecmis-etiket {etiket_sinif}">{etiket_metni}</div>'
+            f'<div class="gecmis-saat">{kayit["saat"]}</div>'
+            f'</div>'
+        )
     st.markdown(gecmis_html, unsafe_allow_html=True)
 
     if st.button("🗑️ Geçmişi Temizle", use_container_width=True):
