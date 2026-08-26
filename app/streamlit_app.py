@@ -1,6 +1,5 @@
 import streamlit as st
 import sys
-import time
 from pathlib import Path
 from datetime import datetime
 from PIL import Image
@@ -18,256 +17,276 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Premium Arka Plan: Radyal Geçiş (Ortası aydınlık, köşeler karanlık) */
     .stApp {
-        background: radial-gradient(circle at 50% 5%, #1e293b 0%, #020617 80%);
+        background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
     }
 
     @keyframes yumusakGiris {
-        from { opacity: 0; transform: translateY(8px); }
+        from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Başlık Alanı */
     .baslik-kutu {
         text-align: center;
-        padding: 2.5rem 1rem 1.5rem 1rem;
+        padding: 2.8rem 1rem 2rem 1rem;
     }
     .baslik-ikon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-        filter: drop-shadow(0 4px 12px rgba(129, 140, 248, 0.4));
+        font-size: 3.4rem;
+        margin-bottom: 0.6rem;
+        filter: drop-shadow(0 6px 16px rgba(129, 140, 248, 0.45));
     }
     .baslik-kutu h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 800;
         color: #F8FAFC;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.4rem;
         letter-spacing: -0.02em;
     }
     .baslik-kutu p {
-        color: #94A3B8;
-        font-size: 0.95rem;
+        color: #A8B3C7;
+        font-size: 1rem;
     }
 
     .bolum-baslik {
-        color: #94A3B8;
-        font-size: 0.85rem;
-        font-weight: 600;
+        color: #A8B3C7;
+        font-size: 0.92rem;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 1.8rem 0 0.8rem 0;
+        letter-spacing: 0.06em;
+        margin: 2.2rem 0 1rem 0;
     }
 
-    /* İstatistik Kutuları - Cam Efekti */
     .istatistik-serit {
         display: flex;
-        gap: 0.8rem;
-        margin: 0.5rem 0 1.5rem 0;
+        gap: 0.9rem;
+        margin: 0.5rem 0 2rem 0;
     }
     .istatistik-kutu {
         flex: 1;
-        background: rgba(30, 41, 59, 0.4);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 14px;
-        padding: 0.9rem 0.5rem;
+        background: rgba(30, 41, 59, 0.55);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-top: 2.5px solid rgba(129, 140, 248, 0.5);
+        border-radius: 16px;
+        padding: 1.2rem 0.6rem;
         text-align: center;
         transition: transform 0.2s ease, border-color 0.2s ease;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
     .istatistik-kutu:hover {
-        transform: translateY(-2px);
-        border-color: rgba(129, 140, 248, 0.3);
+        transform: translateY(-3px);
+        border-top-color: #818CF8;
     }
+    .istatistik-ikon { font-size: 1.15rem; margin-bottom: 0.35rem; }
     .istatistik-sayi {
-        font-size: 1.5rem;
+        font-size: 1.85rem;
         font-weight: 800;
+        line-height: 1.1;
     }
     .istatistik-etiket {
-        font-size: 0.7rem;
-        color: #94A3B8;
-        margin-top: 0.2rem;
+        font-size: 0.75rem;
+        color: #A8B3C7;
+        margin-top: 0.3rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.03em;
+        font-weight: 600;
     }
+    .sayi-toplam { color: #C7D2FE; }
     .sayi-yuksek { color: #F87171; }
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
-    /* Sonuç Çerçevesi - Neon Işıma (Tam çerçeve yerine sol çizgi) */
-    .sonuc-cerceve {
-        margin-top: 1.5rem;
+    div[data-testid="stRadio"] > div[role="radiogroup"] {
+        display: flex;
+        gap: 0.6rem;
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 16px;
-        padding: 0px;
-        animation: yumusakGiris 0.45s ease-out;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
+        padding: 0.4rem;
     }
-    .sonuc-cerceve.cerceve-yuksek { 
-        background: rgba(127, 29, 29, 0.2); 
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-left: 4px solid #ef4444; 
+    div[data-testid="stRadio"] label {
+        flex: 1;
+        text-align: center;
+        border-radius: 12px;
+        padding: 0.85rem 0.5rem !important;
+        margin: 0 !important;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
     }
-    .sonuc-cerceve.cerceve-supheli { 
-        background: rgba(120, 53, 15, 0.2); 
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-left: 4px solid #f59e0b; 
+    div[data-testid="stRadio"] label:has(input:checked) {
+        background: linear-gradient(135deg, #6366F1, #4F46E5);
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
     }
-    .sonuc-cerceve.cerceve-guvenli { 
-        background: rgba(6, 78, 59, 0.2); 
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-left: 4px solid #22c55e; 
+    div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
+        font-size: 1rem !important;
+        color: #F1F5F9 !important;
+    }
+    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
+        display: none;
     }
 
-    .sonuc-ic {
-        background-color: transparent !important;
+    .stTextArea textarea {
         border-radius: 16px;
-        padding: 1.8rem;
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        background: rgba(15, 23, 42, 0.65);
+        color: #F8FAFC;
+        font-size: 1.02rem;
+        line-height: 1.6;
+        padding: 1rem;
+    }
+    .stTextArea textarea:focus {
+        border-color: #818CF8 !important;
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25) !important;
+    }
+
+    .sonuc-cerceve {
+        margin-top: 1.8rem;
+        border-radius: 22px;
+        padding: 2px;
+        animation: yumusakGiris 0.45s ease-out;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+    .sonuc-cerceve.cerceve-yuksek { background: linear-gradient(135deg, #EF4444, #7F1D1D); }
+    .sonuc-cerceve.cerceve-supheli { background: linear-gradient(135deg, #F59E0B, #78350F); }
+    .sonuc-cerceve.cerceve-guvenli { background: linear-gradient(135deg, #22C55E, #14532D); }
+
+    .sonuc-ic {
+        background-color: #0f172a;
+        border-radius: 20px;
+        padding: 2rem;
     }
 
     .sonuc-ust {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 1.2rem;
+        gap: 1.1rem;
+        margin-bottom: 1.4rem;
     }
     .sonuc-daire {
-        width: 56px;
-        height: 56px;
+        width: 62px;
+        height: 62px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         flex-shrink: 0;
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+        box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.12);
     }
-    .daire-yuksek { background: rgba(239, 68, 68, 0.2); }
-    .daire-supheli { background: rgba(245, 158, 11, 0.2); }
-    .daire-guvenli { background: rgba(34, 197, 94, 0.2); }
+    .daire-yuksek { background: rgba(239, 68, 68, 0.22); }
+    .daire-supheli { background: rgba(245, 158, 11, 0.22); }
+    .daire-guvenli { background: rgba(34, 197, 94, 0.22); }
 
     .sonuc-baslik-metin {
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.4rem;
+        font-weight: 800;
         color: #F8FAFC;
     }
     .sonuc-alt-metin {
-        color: #94A3B8;
-        font-size: 0.82rem;
-        margin-top: 0.2rem;
+        color: #A8B3C7;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
     }
 
     .neden-baslik {
-        color: #94A3B8;
-        font-size: 0.78rem;
-        font-weight: 600;
+        color: #A8B3C7;
+        font-size: 0.82rem;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.8rem;
-        padding-top: 0.6rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        letter-spacing: 0.05em;
+        margin-bottom: 0.9rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
     .neden-satiri {
         display: flex;
         align-items: flex-start;
-        gap: 0.7rem;
-        padding: 0.45rem 0;
-        color: #E2E8F0;
-        font-size: 0.92rem;
-        line-height: 1.5;
+        gap: 0.75rem;
+        padding: 0.55rem 0;
+        color: #E7EBF3;
+        font-size: 1rem;
+        line-height: 1.6;
     }
     .neden-nokta {
-        width: 6px;
-        height: 6px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         background-color: #818CF8;
         flex-shrink: 0;
-        margin-top: 0.5rem;
+        margin-top: 0.55rem;
     }
 
-    /* Aksiyon Kutusu - Premium Nötr Numaralar */
     .aksiyon-kutu {
-        background: rgba(30, 41, 59, 0.6);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-top: 1.2rem;
+        background: rgba(30, 41, 59, 0.65);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 18px;
+        padding: 1.7rem;
+        margin-top: 1.4rem;
         animation: yumusakGiris 0.5s ease-out;
     }
     .aksiyon-baslik {
         color: #F8FAFC;
-        font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 1rem;
+        font-weight: 800;
+        font-size: 1.1rem;
+        margin-bottom: 1.1rem;
     }
     .aksiyon-satiri {
         display: flex;
         align-items: center;
-        gap: 0.9rem;
-        padding: 0.6rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        gap: 1rem;
+        padding: 0.7rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     .aksiyon-satiri:first-of-type { border-top: none; }
     .aksiyon-numara {
-        width: 26px;
-        height: 26px;
-        border-radius: 8px;
-        background: #1e293b;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #6366F1, #4F46E5);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #cbd5e1;
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: #FFFFFF;
         flex-shrink: 0;
     }
     .aksiyon-metin {
-        color: #CBD5E1;
-        font-size: 0.88rem;
-        line-height: 1.5;
+        color: #D6DCE8;
+        font-size: 0.96rem;
+        line-height: 1.55;
     }
     .aksiyon-metin strong { color: #F8FAFC; }
 
-    /* Geçmiş Bölümü */
     .gecmis-satiri {
         display: flex;
         align-items: center;
-        gap: 0.8rem;
-        padding: 0.7rem 0.9rem;
-        border-radius: 12px;
-        margin-bottom: 0.5rem;
-        background: rgba(30, 41, 59, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        font-size: 0.85rem;
+        gap: 0.85rem;
+        padding: 0.8rem 1rem;
+        border-radius: 14px;
+        margin-bottom: 0.6rem;
+        background: rgba(30, 41, 59, 0.45);
+        border-left: 4px solid transparent;
+        font-size: 0.92rem;
         transition: all 0.2s ease;
     }
-    .gecmis-satiri:hover { 
-        border-color: rgba(129, 140, 248, 0.3); 
-        background: rgba(30, 41, 59, 0.7); 
-    }
-    .gecmis-nokta {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-    .nokta-yuksek { background-color: #EF4444; }
-    .nokta-supheli { background-color: #F59E0B; }
-    .nokta-guvenli { background-color: #22C55E; }
+    .gecmis-satiri:hover { background: rgba(30, 41, 59, 0.75); }
+    .gecmis-yuksek { border-left-color: #EF4444; }
+    .gecmis-supheli { border-left-color: #F59E0B; }
+    .gecmis-guvenli { border-left-color: #22C55E; }
     .gecmis-mesaj {
-        color: #CBD5E1;
+        color: #D6DCE8;
         flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
     .gecmis-etiket {
-        font-size: 0.7rem;
+        font-size: 0.72rem;
         font-weight: 700;
-        padding: 0.2rem 0.5rem;
+        padding: 0.25rem 0.6rem;
         border-radius: 999px;
         flex-shrink: 0;
         text-transform: uppercase;
@@ -276,68 +295,50 @@ st.markdown("""
     .etiket-supheli { background: rgba(245, 158, 11, 0.2); color: #FBBF24; }
     .etiket-guvenli { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
     .gecmis-saat {
-        color: #64748B;
-        font-size: 0.75rem;
+        color: #7E8AA3;
+        font-size: 0.78rem;
         flex-shrink: 0;
     }
 
     .footer-not {
         text-align: center;
-        color: #64748B;
-        font-size: 0.75rem;
-        margin-top: 3rem;
-        padding-top: 1.2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        color: #7E8AA3;
+        font-size: 0.82rem;
+        margin-top: 3.2rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     div[data-testid="stFileUploader"] {
         border: 1.5px dashed rgba(129, 140, 248, 0.3);
         border-radius: 16px;
-        padding: 1rem;
+        padding: 1.1rem;
         background: rgba(30, 41, 59, 0.3);
     }
-    
-    /* Siber Güvenlik Butonu */
     .stButton button {
-        border-radius: 10px;
-        font-weight: 600;
-        padding: 0.65rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
-        color: white;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 1.02rem;
+        padding: 0.75rem 0;
+        border: none;
+        background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+        transition: all 0.2s ease;
     }
     .stButton button:hover {
         transform: translateY(-2px);
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        color: white;
-    }
-    
-    /* Text Alanı */
-    .stTextArea textarea {
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background-color: rgba(15, 23, 42, 0.5);
-        color: #F8FAFC;
-    }
-    .stTextArea textarea:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
     }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown(
-    '<div class="baslik-kutu">'
-    '<div class="baslik-ikon">🛡️</div>'
-    '<h1>Dolandırıcı Mesaj Tespit Asistanı</h1>'
-    '<p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>'
-    '</div>', 
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="baslik-kutu">
+    <div class="baslik-ikon">🛡️</div>
+    <h1>Dolandırıcı Mesaj Tespit Asistanı</h1>
+    <p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>
+</div>
+""", unsafe_allow_html=True)
 
 
 @st.cache_resource(show_spinner="Yapay zeka modeli yükleniyor... Lütfen bekleyin.")
@@ -368,10 +369,10 @@ if st.session_state.gecmis:
 
     st.markdown(
         f'<div class="istatistik-serit">'
-        f'<div class="istatistik-kutu"><div class="istatistik-sayi">{toplam}</div><div class="istatistik-etiket">Toplam Kontrol</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div><div class="istatistik-etiket">Yüksek Riskli</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div><div class="istatistik-etiket">Şüpheli</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div><div class="istatistik-etiket">Güvenli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-ikon">📊</div><div class="istatistik-sayi sayi-toplam">{toplam}</div><div class="istatistik-etiket">Toplam</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🔴</div><div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div><div class="istatistik-etiket">Riskli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🟡</div><div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div><div class="istatistik-etiket">Şüpheli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🟢</div><div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div><div class="istatistik-etiket">Güvenli</div></div>'
         f'</div>',
         unsafe_allow_html=True,
     )
@@ -380,15 +381,15 @@ st.markdown('<div class="bolum-baslik">Mesajı Ekleyin</div>', unsafe_allow_html
 
 giris_yontemi = st.radio(
     "Giriş yöntemi",
-    ["✍️ Metni yapıştır", "📷 Ekran görüntüsü yükle"],
+    ["✍️ Metni Yapıştır", "📷 Ekran Görüntüsü"],
     horizontal=True,
     label_visibility="collapsed",
 )
 
 mesaj = ""
 
-if giris_yontemi == "✍️ Metni yapıştır":
-    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=130, placeholder="Örn: Kargonuz teslim edilemedi, tıklayın...", label_visibility="collapsed")
+if giris_yontemi == "✍️ Metni Yapıştır":
+    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
         "SMS, WhatsApp ya da e-posta ekran görüntüsünü yükleyin",
@@ -407,7 +408,7 @@ else:
         else:
             st.warning("Görselden metin okunamadı, lütfen daha net bir görsel yükleyin ya da metni elle yazın.")
 
-analiz_butonu = st.button("🔍 Mesajı Analiz Et", type="primary", use_container_width=True)
+analiz_butonu = st.button("🔍  Mesajı Analiz Et", type="primary", use_container_width=True)
 
 ETIKET_METNI = {
     "yuksek_riskli": "Yüksek Riskli",
@@ -415,19 +416,18 @@ ETIKET_METNI = {
     "guvenli": "Güvenli",
 }
 
+GECMIS_SINIF = {
+    "yuksek_riskli": "gecmis-yuksek",
+    "supheli": "gecmis-supheli",
+    "guvenli": "gecmis-guvenli",
+}
+
 if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
     else:
-        with st.status("🛡️ Güvenlik kalkanı çalıştırılıyor...", expanded=True) as status:
-            st.write("🔍 Metin ayıklanıyor ve taranıyor...")
-            time.sleep(0.3)
-            st.write("🤖 BERT Yapay Zeka modeli bağlamı inceliyor...")
-            time.sleep(0.3)
-            st.write("⚠️ Oltalama ve tehdit kalkanları denetleniyor...")
+        with st.spinner("Yapay zeka bağlamı inceliyor..."):
             sonuc = tahmin_et(mesaj, tokenizer, model)
-            time.sleep(0.2)
-            status.update(label="✅ Analiz tamamlandı!", state="complete", expanded=False)
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
@@ -454,7 +454,7 @@ if analiz_butonu:
 
         alt_metin = {
             "yuksek_riskli": "Bilinen dolandırıcılık/tehdit kalıplarıyla eşleşti",
-            "supheli": "Bazı şüpheli sinyaller veya riskler tespit edildi",
+            "supheli": "Bazı şüpheli sinyaller tespit edildi",
             "guvenli": "Bilinen hiçbir riskli kalıba uymuyor",
         }.get(risk, "")
 
@@ -499,25 +499,17 @@ if analiz_butonu:
 if st.session_state.gecmis:
     st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
 
-    nokta_sinif_haritasi = {
-        "yuksek_riskli": "nokta-yuksek",
-        "supheli": "nokta-supheli",
-        "guvenli": "nokta-guvenli",
-    }
-    etiket_sinif_haritasi = {
-        "yuksek_riskli": "etiket-yuksek",
-        "supheli": "etiket-supheli",
-        "guvenli": "etiket-guvenli",
-    }
-
     gecmis_html = ""
     for kayit in st.session_state.gecmis:
-        nokta_sinif = nokta_sinif_haritasi.get(kayit["risk"], "nokta-supheli")
-        etiket_sinif = etiket_sinif_haritasi.get(kayit["risk"], "etiket-supheli")
+        gecmis_sinif = GECMIS_SINIF.get(kayit["risk"], "gecmis-supheli")
+        etiket_sinif = {
+            "yuksek_riskli": "etiket-yuksek",
+            "supheli": "etiket-supheli",
+            "guvenli": "etiket-guvenli",
+        }.get(kayit["risk"], "etiket-supheli")
         etiket_metni = ETIKET_METNI.get(kayit["risk"], "Bilinmiyor")
         gecmis_html += (
-            f'<div class="gecmis-satiri">'
-            f'<div class="gecmis-nokta {nokta_sinif}"></div>'
+            f'<div class="gecmis-satiri {gecmis_sinif}">'
             f'<div class="gecmis-mesaj">{kayit["mesaj"]}</div>'
             f'<div class="gecmis-etiket {etiket_sinif}">{etiket_metni}</div>'
             f'<div class="gecmis-saat">{kayit["saat"]}</div>'
@@ -525,13 +517,12 @@ if st.session_state.gecmis:
         )
     st.markdown(gecmis_html, unsafe_allow_html=True)
 
-    if st.button("🗑️ Geçmişi Temizle", use_container_width=True):
+    if st.button("🗑️  Geçmişi Temizle", use_container_width=True):
         st.session_state.gecmis = []
         st.rerun()
 
-st.markdown(
-    '<div class="footer-not">'
-    'Bu araç kesin doğruluk garanti etmez, şüphe durumunda her zaman sağduyunuzu kullanın.'
-    '</div>', 
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="footer-not">
+    Bu araç kesin doğruluk garanti etmez, şüphe durumunda her zaman sağduyunuzu kullanın.
+</div>
+""", unsafe_allow_html=True)
