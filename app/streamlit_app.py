@@ -56,6 +56,7 @@ st.markdown("""
         margin: 2.2rem 0 1rem 0;
     }
 
+    /* --- Istatistik kartlari: sade stil + hover buyume --- */
     .istatistik-serit {
         display: flex;
         gap: 0.9rem;
@@ -63,29 +64,27 @@ st.markdown("""
     }
     .istatistik-kutu {
         flex: 1;
-        background: rgba(30, 41, 59, 0.55);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        border-top: 2.5px solid rgba(129, 140, 248, 0.5);
-        border-radius: 16px;
-        padding: 1.2rem 0.6rem;
+        background-color: #12172A;
+        border: 1px solid #1F2740;
+        border-radius: 14px;
+        padding: 0.95rem 0.6rem;
         text-align: center;
-        transition: transform 0.2s ease, border-color 0.2s ease;
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
     .istatistik-kutu:hover {
-        transform: translateY(-3px);
-        border-top-color: #818CF8;
+        transform: translateY(-3px) scale(1.03);
+        border-color: #4C5578;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
     }
-    .istatistik-ikon { font-size: 1.15rem; margin-bottom: 0.35rem; }
     .istatistik-sayi {
-        font-size: 1.85rem;
+        font-size: 1.6rem;
         font-weight: 800;
         line-height: 1.1;
     }
     .istatistik-etiket {
-        font-size: 0.75rem;
-        color: #A8B3C7;
-        margin-top: 0.3rem;
+        font-size: 0.72rem;
+        color: #7C8397;
+        margin-top: 0.25rem;
         text-transform: uppercase;
         letter-spacing: 0.03em;
         font-weight: 600;
@@ -361,34 +360,40 @@ except Exception as e:
 if "gecmis" not in st.session_state:
     st.session_state.gecmis = []
 
-if st.session_state.gecmis:
+
+def istatistik_html_uret():
     toplam = len(st.session_state.gecmis)
     yuksek_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "yuksek_riskli")
     supheli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "supheli")
     guvenli_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "guvenli")
-
-    st.markdown(
+    return (
         f'<div class="istatistik-serit">'
-        f'<div class="istatistik-kutu"><div class="istatistik-ikon">📊</div><div class="istatistik-sayi sayi-toplam">{toplam}</div><div class="istatistik-etiket">Toplam</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🔴</div><div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div><div class="istatistik-etiket">Riskli</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🟡</div><div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div><div class="istatistik-etiket">Şüpheli</div></div>'
-        f'<div class="istatistik-kutu"><div class="istatistik-ikon">🟢</div><div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div><div class="istatistik-etiket">Güvenli</div></div>'
-        f'</div>',
-        unsafe_allow_html=True,
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-toplam">{toplam}</div><div class="istatistik-etiket">Toplam</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-yuksek">{yuksek_sayisi}</div><div class="istatistik-etiket">Riskli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-supheli">{supheli_sayisi}</div><div class="istatistik-etiket">Şüpheli</div></div>'
+        f'<div class="istatistik-kutu"><div class="istatistik-sayi sayi-guvenli">{guvenli_sayisi}</div><div class="istatistik-etiket">Güvenli</div></div>'
+        f'</div>'
     )
 
-st.markdown('<div class="bolum-baslik">Mesajı Ekleyin</div>', unsafe_allow_html=True)
+
+# Yer tutucu: analiz sonrasi bu ayni yerin icerigini guncelleyecegiz,
+# boylece istatistikler bir tik geriden gelmeyip ANINDA guncellenecek.
+istatistik_yer_tutucu = st.empty()
+if st.session_state.gecmis:
+    istatistik_yer_tutucu.markdown(istatistik_html_uret(), unsafe_allow_html=True)
+
+st.markdown('<div class="bolum-baslik">Mesaj Türü Seçiniz</div>', unsafe_allow_html=True)
 
 giris_yontemi = st.radio(
     "Giriş yöntemi",
-    ["✍️ Metni Yapıştır", "📷 Ekran Görüntüsü"],
+    ["✍️ Metni Giriniz", "📷 Fotoğraf Yükle"],
     horizontal=True,
     label_visibility="collapsed",
 )
 
 mesaj = ""
 
-if giris_yontemi == "✍️ Metni Yapıştır":
+if giris_yontemi == "✍️ Metni Giriniz":
     mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
@@ -439,6 +444,10 @@ if analiz_butonu:
             "saat": datetime.now().strftime("%H:%M"),
         })
         st.session_state.gecmis = st.session_state.gecmis[:10]
+
+        # Yer tutucuyu GUNCEL veriyle hemen yeniden doldur - boylece
+        # istatistikler bir tik geriden gelmez, aninda yansir.
+        istatistik_yer_tutucu.markdown(istatistik_html_uret(), unsafe_allow_html=True)
 
         cerceve_sinif = {
             "yuksek_riskli": "cerceve-yuksek",
