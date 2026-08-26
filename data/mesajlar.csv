@@ -8705,3 +8705,603 @@ Cocuklarla parka gidip biraz vakit gecirelim,guvenli,normal
 "Market listesini hazirladim, cikarken alalim",guvenli,normal
 "Yarinki toplantiyi 10:30 alabilir miyiz, musait misin?",guvenli,normal
 "Kullaniciliginiz olusturuldugunu fark ettik, uyelik islemlerinizi tamamlamak icin tiklayin: kargo-bedel.xyz",yuksek_riskli,phishing_genel
+Bak sana söylüyorum susmazsan zarar veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, bu işi bitirmezsen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol dediğimi yapmazsan mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum anlaşmayı bozarsan çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, sözümü dinlemezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, hesabı kapatmazsan kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol yapmazsan eğer seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, 1000 tl atmazsan zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırılırsın. 1000 tl atmazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, dediğimi yapmazsan ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol dediğimi yapmazsan polislik olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum bana gelmezsen rezil ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Itiraz edersen, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Döverim eğer 500 tl vermezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, istediğimi göndermezsen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kimseye söylersen, bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırırım eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol geri adım atmazsan hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, 1000 tl atmazsan kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kaçırırım, param gelmezse",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, gelmezsen eğer pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Korkunç şeyler olur eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, beni engellersen elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum polise gidersen bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum istediğimi göndermezsen geberirsin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: geri adım atmazsan mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum gelmezsen eğer bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, sözümü dinlemezsen geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, yoksa hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, hesabı kapatmazsan pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kan dökerim, vermezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, beni aramazsan pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canını yakarım eğer dediğimi yapmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol sözümü dinlemezsen canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Seni soyarım, gelmezsen eğer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, dediğimi yapmazsan işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Toplantıya gelmezsen, geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: susmazsan başına iş açarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, yapmazsan eğer başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum gelmezsen eğer seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ölürsün, beni aramazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, susmazsan acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, 500 tl vermezsen canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni engellersen vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, polise gidersen zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, yoksa hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, geri adım atmazsan döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum cevap vermezsen gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, 1000 tl atmazsan hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yarına kadar ödemezsen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Pişman olursun eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, hesabı kapatmazsan kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum 1000 tl atmazsan hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, yoksa acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum polise gidersen zarar veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"1000 tl atmazsan, paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, istediğimi göndermezsen kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, 1000 tl atmazsan pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol yoksa canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, kimseye söylersen başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Çocuğun tehlikede olur, anlaşmayı bozarsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Anlaşmayı bozarsan, işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni aramazsan işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Mahvederim eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, aksi halde pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, anlaşmayı bozarsan korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol 500 tl vermezsen hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: aksi halde öldürürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol beni engellersen gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bana gelmezsen, pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, borcunu ödemezsen korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, toplantıya gelmezsen ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol vermezsen başına iş açarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol beni aramazsan mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, yarına kadar ödemezsen bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, yoksa gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yoksa kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, istediğimi göndermezsen rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, yoksa gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, sözümü dinlemezsen seni ezerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırırım eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, bu işi bitirmezsen hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Vermezsen, yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Başın belaya girer, polise gidersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Toplantıya gelmezsen, çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, param gelmezse kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum cevap vermezsen kaçırırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, bana gelmezsen başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Polise gidersen, işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, aksi takdirde ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, geri adım atmazsan geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol itiraz edersen canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kaçırırım, sözümü dinlemezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, 1000 tl atmazsan seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, istediğimi göndermezsen canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, kimseye söylersen başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Keserim, aksi halde",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, gelmezsen eğer bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, dediğimi yapmazsan ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, susmazsan kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, yapmazsan eğer canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, aksi takdirde elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, aksi takdirde geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol 500 tl vermezsen bedelini ödersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, beni aramazsan keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Ailen zarar görür. 500 tl vermezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canına kıyarım eğer 500 tl vermezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Vururum eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, geri adım atmazsan hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırırım eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol geri adım atmazsan seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, toplantıya gelmezsen ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum param gelmezse işini bitiririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, param gelmezse ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, beni engellersen keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum yapmazsan eğer gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, beni aramazsan hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, polise gidersen hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum gelmezsen eğer rezil ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: borcunu ödemezsen kan dökerim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, param gelmezse ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum itiraz edersen işini kaybedersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canına kıyarım eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, itiraz edersen geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: 500 tl vermezsen mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, toplantıya gelmezsen vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Toplantıya gelmezsen, öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, beni aramazsan korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Cevap vermezsen, kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol itiraz edersen kan dökerim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Ölürsün eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum geri adım atmazsan gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, bu işi bitirmezsen yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, sözümü dinlemezsen elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, anlaşmayı bozarsan kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, toplantıya gelmezsen kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, vermezsen bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yapmazsan eğer kaçırılırsın,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Hayatına son veririm. aksi halde bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, 1000 tl atmazsan mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, anlaşmayı bozarsan işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hayatına son veririm, bu işi bitirmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: 1000 tl atmazsan pişman olursun,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, borcunu ödemezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, polise gidersen seni ezerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Vururum. istediğimi göndermezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bana gelmezsen, bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, istediğimi göndermezsen geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, beni aramazsan rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, param gelmezse seni ezerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, istediğimi göndermezsen seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, kimseye söylersen gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni engellersen ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: geri adım atmazsan geberirsin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, bu işi bitirmezsen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Gasp ederim, gelmezsen eğer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, polise gidersen gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yarına kadar ödemezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Beni aramazsan, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, hesabı kapatmazsan mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, param gelmezse bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, itiraz edersen döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, aksi halde seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum borcunu ödemezsen gasp ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Mahvederim eğer dediğimi yapmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, kimseye söylersen keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, bu işi bitirmezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: cevap vermezsen hayatını karartırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Işini bitiririm, cevap vermezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, bu işi bitirmezsen zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, geri adım atmazsan ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, aksi halde mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol susmazsan keserim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Beni engellersen, kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Hayatını karartırım. itiraz edersen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: hesabı kapatmazsan çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Başına iş açarım eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Rezil ederim, toplantıya gelmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, sözümü dinlemezsen yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Öldürürsün, yoksa",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, dediğimi yapmazsan korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, itiraz edersen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kolunu kırarım eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Param gelmezse, keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: istediğimi göndermezsen korkunç şeyler olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Itiraz edersen, ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, yarına kadar ödemezsen ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, itiraz edersen vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, beni aramazsan pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, vermezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, beni engellersen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, aksi takdirde rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hastanelik ederim, bana gelmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, sözümü dinlemezsen başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Hastanelik ederim eğer 500 tl vermezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: aksi takdirde işini kaybedersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, geri adım atmazsan mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, 500 tl vermezsen kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, yarına kadar ödemezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yarına kadar ödemezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, kimseye söylersen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Canını yakarım, bu işi bitirmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol yarına kadar ödemezsen seni ezerim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, aksi halde başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol dediğimi yapmazsan öldürürüm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hapse girersin, itiraz edersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Zarar veririm, param gelmezse",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol bu işi bitirmezsen işini bitiririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Mahvederim, yarına kadar ödemezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, beni aramazsan canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, istediğimi göndermezsen döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Öldürürsün, polise gidersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, susmazsan yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Geri adım atmazsan, başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Elini kolunu kırarım. borcunu ödemezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: kimseye söylersen bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, polise gidersen canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Zarar görürsün eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, hesabı kapatmazsan bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Hastanelik ederim. beni aramazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, beni aramazsan ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, param gelmezse öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, kimseye söylersen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum bana gelmezsen gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 1000 tl atmazsan canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, kimseye söylersen kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, yoksa vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, beni engellersen ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bedelini ödersin eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, beni aramazsan ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, dediğimi yapmazsan polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum borcunu ödemezsen çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, toplantıya gelmezsen başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, vermezsen zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, dediğimi yapmazsan mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Seni soyarım, param gelmezse",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, toplantıya gelmezsen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ifşa ederim, hesabı kapatmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum yarına kadar ödemezsen bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bıçaklarım eğer dediğimi yapmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, 1000 tl atmazsan öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, borcunu ödemezsen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: itiraz edersen ailen zarar görür,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, cevap vermezsen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, susmazsan döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sözümü dinlemezsen, canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, dediğimi yapmazsan kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, geri adım atmazsan gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yarına kadar ödemezsen başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol aksi halde çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Zarar görürsün, param gelmezse",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, param gelmezse acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, anlaşmayı bozarsan hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, yoksa öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, bana gelmezsen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, 500 tl vermezsen bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canını yakarım eğer 500 tl vermezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, gelmezsen eğer hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol gelmezsen eğer ölürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"500 tl vermezsen, ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: toplantıya gelmezsen başına iş açarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol sözümü dinlemezsen bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Yakarım evini eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, kimseye söylersen çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, itiraz edersen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, cevap vermezsen polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum yoksa pişman olursun,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, hesabı kapatmazsan işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Borcunu ödemezsen, kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, cevap vermezsen canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Öldürürsün eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, bu işi bitirmezsen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, susmazsan paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, cevap vermezsen seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Yarına kadar ödemezsen, canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Polislik olur. cevap vermezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, aksi halde korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, toplantıya gelmezsen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, bana gelmezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, 1000 tl atmazsan kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol geri adım atmazsan zarar görürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Başına iş açarım, yapmazsan eğer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol itiraz edersen çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, istediğimi göndermezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: 500 tl vermezsen hayatına son veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, bu işi bitirmezsen pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, dediğimi yapmazsan kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, bana gelmezsen döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Zarar görürsün. susmazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, geri adım atmazsan yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Beni aramazsan, başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, itiraz edersen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum polise gidersen rezil ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, hesabı kapatmazsan kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, kimseye söylersen bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırılırsın. geri adım atmazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, anlaşmayı bozarsan kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, beni engellersen çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, geri adım atmazsan vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"1000 tl atmazsan, hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kanun karışır, kimseye söylersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum itiraz edersen hayatını karartırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, istediğimi göndermezsen bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bedelini ödersin eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Öldürürüm eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, toplantıya gelmezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: aksi takdirde mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, yoksa geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol istediğimi göndermezsen ölürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: hesabı kapatmazsan zarar görürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, aksi takdirde öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, kimseye söylersen paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: beni engellersen öldürürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kaçırırım. vermezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Gelmezsen eğer, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Ifşa ederim eğer dediğimi yapmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, beni aramazsan polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, beni engellersen başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, sözümü dinlemezsen öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Cevap vermezsen, çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Vururum, polise gidersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum yoksa seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Öldürürüm eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, kimseye söylersen seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 1000 tl atmazsan rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Mahvederim eğer 500 tl vermezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, hesabı kapatmazsan canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, gelmezsen eğer çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Polislik olur, 1000 tl atmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol dediğimi yapmazsan zarar veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, susmazsan hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, bu işi bitirmezsen geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, cevap vermezsen canını yakarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, gelmezsen eğer başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, polise gidersen hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum cevap vermezsen kanun karışır,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol beni aramazsan kaçırırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, yapmazsan eğer öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Yarına kadar ödemezsen, ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, sözümü dinlemezsen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, beni engellersen başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, cevap vermezsen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Geberirsin eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, itiraz edersen keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Canını yakarım, yapmazsan eğer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"500 tl vermezsen, kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: polise gidersen kanun karışır,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, yarına kadar ödemezsen elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: itiraz edersen işini kaybedersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, itiraz edersen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: aksi takdirde ifşa ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Yoksa, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Zarar görürsün. yapmazsan eğer bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yoksa ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Istediğimi göndermezsen, rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dediğimi yapmazsan, döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu işi bitirmezsen, döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Döverim, dediğimi yapmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, cevap vermezsen seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, geri adım atmazsan gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Itiraz edersen, kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: anlaşmayı bozarsan hapse girersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Paranı çalarım eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni engellersen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"500 tl vermezsen, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: bana gelmezsen işini kaybedersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, aksi halde başın belaya girer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, geri adım atmazsan keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, borcunu ödemezsen pişman olursun",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: vermezsen ölürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Keserim. yapmazsan eğer bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yarına kadar ödemezsen kaçırırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum gelmezsen eğer gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Döverim eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: gelmezsen eğer ailen zarar görür,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"1000 tl atmazsan, elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, hesabı kapatmazsan hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, aksi halde seni ezerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, geri adım atmazsan bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol aksi halde hapse girersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, aksi takdirde polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol anlaşmayı bozarsan hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Gebertirim eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hastanelik ederim, beni aramazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bıçaklarım eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, itiraz edersen ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, susmazsan kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, hesabı kapatmazsan geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, istediğimi göndermezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, kimseye söylersen bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, aksi takdirde polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, geri adım atmazsan kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 1000 tl atmazsan hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, cevap vermezsen rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, anlaşmayı bozarsan kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, yapmazsan eğer polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, yarına kadar ödemezsen polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, cevap vermezsen hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: hesabı kapatmazsan işini bitiririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, geri adım atmazsan rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, kimseye söylersen öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol yarına kadar ödemezsen elini kolunu kırarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, borcunu ödemezsen döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum aksi takdirde işini kaybedersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, beni aramazsan çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yarına kadar ödemezsen öldürürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Vururum, sözümü dinlemezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Işini bitiririm eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, susmazsan kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, sözümü dinlemezsen öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kolunu kırarım, geri adım atmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, kimseye söylersen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, vermezsen öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Kaçırırım, yapmazsan eğer",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yoksa ifşa ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yapmazsan eğer canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Ölürsün. yapmazsan eğer bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: susmazsan hapse girersin,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: toplantıya gelmezsen döverim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum beni aramazsan çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, hesabı kapatmazsan kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, itiraz edersen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Yakarım evini, dediğimi yapmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, bu işi bitirmezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hayatına son veririm, susmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, sözümü dinlemezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol aksi halde yakarım evini,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum toplantıya gelmezsen hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni aramazsan acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, bu işi bitirmezsen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Mahvederim. sözümü dinlemezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, susmazsan paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, anlaşmayı bozarsan ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Çocuğun tehlikede olur. anlaşmayı bozarsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bedelini ödersin. 1000 tl atmazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"1000 tl atmazsan, zarar görürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Korkunç şeyler olur. toplantıya gelmezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Zarar veririm. param gelmezse bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Çocuğun tehlikede olur, bu işi bitirmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum beni aramazsan bıçaklarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: polise gidersen gasp ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, aksi halde paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Seni ezerim, toplantıya gelmezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Zarar veririm. bana gelmezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, susmazsan bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Çocuğun tehlikede olur eğer dediğimi yapmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: cevap vermezsen seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: sözümü dinlemezsen ifşa ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, hesabı kapatmazsan başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni aramazsan öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, toplantıya gelmezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, aksi halde hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, beni engellersen hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, yapmazsan eğer ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, beni aramazsan ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum polise gidersen ölürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, cevap vermezsen seni ezerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, toplantıya gelmezsen kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum bana gelmezsen zarar veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, dediğimi yapmazsan kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, istediğimi göndermezsen kaçırırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol sözümü dinlemezsen yakarım evini,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Keserim. anlaşmayı bozarsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, hesabı kapatmazsan elini kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Aksi takdirde, ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum bu işi bitirmezsen canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bıçaklarım eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, param gelmezse mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, sözümü dinlemezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Işini bitiririm. toplantıya gelmezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, sözümü dinlemezsen korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol bana gelmezsen seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, yapmazsan eğer bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Param gelmezse, bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, param gelmezse yakarım evini",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum yapmazsan eğer gasp ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canına kıyarım eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Seni ezerim, kimseye söylersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol bana gelmezsen çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum bana gelmezsen hayatını karartırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Mahvederim eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, dediğimi yapmazsan hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Beni engellersen, vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bedelini ödersin, hesabı kapatmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Işini kaybedersin, beni engellersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, yarına kadar ödemezsen seni soyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Işini kaybedersin, polise gidersen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bedelini ödersin eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: gelmezsen eğer kolunu kırarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, beni aramazsan paranı çalarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, borcunu ödemezsen kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Kanun karışır eğer itiraz edersen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Öldürürüm, hesabı kapatmazsan",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, bana gelmezsen gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, anlaşmayı bozarsan acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: toplantıya gelmezsen korkunç şeyler olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, susmazsan acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: sözümü dinlemezsen hastanelik ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, gelmezsen eğer acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum cevap vermezsen hayatına son veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, aksi halde döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol toplantıya gelmezsen yakarım evini,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, istediğimi göndermezsen kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, itiraz edersen kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Toplantıya gelmezsen, ölürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol param gelmezse hayatını karartırım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum geri adım atmazsan mahvederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, istediğimi göndermezsen çocuğun tehlikede olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol itiraz edersen hayatına son veririm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, toplantıya gelmezsen rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: gelmezsen eğer vururum,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Param gelmezse, döverim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, 1000 tl atmazsan hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: borcunu ödemezsen seni ezerim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, hesabı kapatmazsan hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Pişman olursun. toplantıya gelmezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, susmazsan zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, susmazsan hapse girersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, sözümü dinlemezsen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, bu işi bitirmezsen kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, borcunu ödemezsen bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: toplantıya gelmezsen canını yakarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, beni engellersen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, istediğimi göndermezsen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, vermezsen işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, itiraz edersen kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol geri adım atmazsan keserim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, susmazsan vururum",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, geri adım atmazsan canına kıyarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Borcunu ödemezsen, kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, 1000 tl atmazsan hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Vermezsen, geberirsin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canına kıyarım. anlaşmayı bozarsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, bu işi bitirmezsen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, toplantıya gelmezsen başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hapse girersin, vermezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Canını yakarım eğer bana gelmezsen,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, 500 tl vermezsen öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, borcunu ödemezsen işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, kimseye söylersen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, gelmezsen eğer öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, cevap vermezsen keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: anlaşmayı bozarsan seni soyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, susmazsan korkunç şeyler olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, beni engellersen gasp ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Döverim eğer susmazsan,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum 500 tl vermezsen vururum,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, param gelmezse kanun karışır",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, gelmezsen eğer bedelini ödersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, dediğimi yapmazsan başına iş açarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Gasp ederim. sözümü dinlemezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bedelini ödersin. hesabı kapatmazsan bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bu son uyarım, sözümü dinlemezsen mahvederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, vermezsen kolunu kırarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, sözümü dinlemezsen ifşa ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Emin ol geri adım atmazsan çocuğun tehlikede olur,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hastanelik ederim, param gelmezse",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Param gelmezse, gebertirim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Görürsün, beni engellersen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, susmazsan keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, yarına kadar ödemezsen acı çekersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum geri adım atmazsan zarar görürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, bana gelmezsen polislik olur",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Ölürsün eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Susmazsan, kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum toplantıya gelmezsen gebertirim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yoksa canına kıyarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 1000 tl atmazsan işini kaybedersin",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, toplantıya gelmezsen keserim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, yoksa öldürürsün",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 1000 tl atmazsan bıçaklarım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, hesabı kapatmazsan öldürürüm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Çocuğun tehlikede olur. toplantıya gelmezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Keserim. vermezsen bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Hapse girersin, aksi takdirde",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: aksi halde paranı çalarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Beni aramazsan, işini bitiririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Yapmazsan eğer, hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ciddiyim, vermezsen ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, 500 tl vermezsen hastanelik ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bana gelmezsen, kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, beni engellersen kaçırılırsın",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Bıçaklarım, vermezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, susmazsan rezil ederim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, borcunu ödemezsen zarar veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Işini kaybedersin. aksi halde bunu unutma.,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Sana son kez söylüyorum, borcunu ödemezsen kan dökerim",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, yoksa hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum borcunu ödemezsen kaçırılırsın,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum susmazsan gasp ederim,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Ifşa ederim, yarına kadar ödemezsen",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, itiraz edersen ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+"İyi düşün, vermezsen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum gelmezsen eğer öldürürüm,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Şaka yapmıyorum, bu işi bitirmezsen hayatına son veririm",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bak sana söylüyorum hesabı kapatmazsan elini kolunu kırarım,yuksek_riskli,dogrudan_tehdit_santaj_genis
+Pişman olursun eğer param gelmezse,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Uyarıyorum seni, yapmazsan eğer ailen zarar görür",yuksek_riskli,dogrudan_tehdit_santaj_genis
+Bunu ciddiye al: yoksa ölürsün,yuksek_riskli,dogrudan_tehdit_santaj_genis
+"Dikkatli ol, param gelmezse hayatını karartırım",yuksek_riskli,dogrudan_tehdit_santaj_genis
