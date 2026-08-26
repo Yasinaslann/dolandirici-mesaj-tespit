@@ -361,7 +361,7 @@ st.markdown("""
         border-color: rgba(186, 230, 253, 0.5) !important;
     }
 </style>
-""", unsafe_allow_html=True)
+""")
 
 st.markdown("""
 <div class="baslik-kutu">
@@ -473,7 +473,11 @@ if analiz_butonu:
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
-        baslik = sonuc["baslik"]
+        
+        # --- YENİ EKLENEN KISIM: ORAN YÜZDESİ ---
+        oran_metni = f" (%{sonuc['oran']:.1f})" if "oran" in sonuc else ""
+        baslik = sonuc["baslik"] if "oran" in sonuc.get("baslik", "") else sonuc["baslik"] + oran_metni
+        # ----------------------------------------
 
         st.session_state.gecmis.insert(0, {
             "mesaj": mesaj[:55] + ("..." if len(mesaj) > 55 else ""),
