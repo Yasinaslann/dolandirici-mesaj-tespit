@@ -18,8 +18,9 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+    /* Premium Arka Plan: Radyal Geçiş (Ortası aydınlık, köşeler karanlık) */
     .stApp {
-        background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
+        background: radial-gradient(circle at 50% 5%, #1e293b 0%, #020617 80%);
     }
 
     @keyframes yumusakGiris {
@@ -27,6 +28,7 @@ st.markdown("""
         to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Başlık Alanı */
     .baslik-kutu {
         text-align: center;
         padding: 2.5rem 1rem 1.5rem 1rem;
@@ -57,6 +59,7 @@ st.markdown("""
         margin: 1.8rem 0 0.8rem 0;
     }
 
+    /* İstatistik Kutuları - Cam Efekti */
     .istatistik-serit {
         display: flex;
         gap: 0.8rem;
@@ -64,13 +67,14 @@ st.markdown("""
     }
     .istatistik-kutu {
         flex: 1;
-        background: rgba(30, 41, 59, 0.5);
+        background: rgba(30, 41, 59, 0.4);
         backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 14px;
         padding: 0.9rem 0.5rem;
         text-align: center;
         transition: transform 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
     .istatistik-kutu:hover {
         transform: translateY(-2px);
@@ -85,26 +89,40 @@ st.markdown("""
         color: #94A3B8;
         margin-top: 0.2rem;
         text-transform: uppercase;
-        letter-spacing: 0.03em;
+        letter-spacing: 1px;
     }
     .sayi-yuksek { color: #F87171; }
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
+    /* Sonuç Çerçevesi - Neon Işıma (Tam çerçeve yerine sol çizgi) */
     .sonuc-cerceve {
         margin-top: 1.5rem;
-        border-radius: 20px;
-        padding: 2px;
+        border-radius: 16px;
+        padding: 0px;
         animation: yumusakGiris 0.45s ease-out;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
     }
-    .sonuc-cerceve.cerceve-yuksek { background: linear-gradient(135deg, #EF4444, #7F1D1D); }
-    .sonuc-cerceve.cerceve-supheli { background: linear-gradient(135deg, #F59E0B, #78350F); }
-    .sonuc-cerceve.cerceve-guvenli { background: linear-gradient(135deg, #22C55E, #14532D); }
+    .sonuc-cerceve.cerceve-yuksek { 
+        background: rgba(127, 29, 29, 0.2); 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #ef4444; 
+    }
+    .sonuc-cerceve.cerceve-supheli { 
+        background: rgba(120, 53, 15, 0.2); 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #f59e0b; 
+    }
+    .sonuc-cerceve.cerceve-guvenli { 
+        background: rgba(6, 78, 59, 0.2); 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #22c55e; 
+    }
 
     .sonuc-ic {
-        background-color: #0f172a;
-        border-radius: 18px;
+        background-color: transparent !important;
+        border-radius: 16px;
         padding: 1.8rem;
     }
 
@@ -168,6 +186,7 @@ st.markdown("""
         margin-top: 0.5rem;
     }
 
+    /* Aksiyon Kutusu - Premium Nötr Numaralar */
     .aksiyon-kutu {
         background: rgba(30, 41, 59, 0.6);
         backdrop-filter: blur(10px);
@@ -195,13 +214,14 @@ st.markdown("""
         width: 26px;
         height: 26px;
         border-radius: 8px;
-        background: linear-gradient(135deg, #6366F1, #4F46E5);
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 0.75rem;
         font-weight: 700;
-        color: #FFFFFF;
+        color: #cbd5e1;
         flex-shrink: 0;
     }
     .aksiyon-metin {
@@ -211,6 +231,7 @@ st.markdown("""
     }
     .aksiyon-metin strong { color: #F8FAFC; }
 
+    /* Geçmiş Bölümü */
     .gecmis-satiri {
         display: flex;
         align-items: center;
@@ -223,7 +244,10 @@ st.markdown("""
         font-size: 0.85rem;
         transition: all 0.2s ease;
     }
-    .gecmis-satiri:hover { border-color: rgba(129, 140, 248, 0.3); background: rgba(30, 41, 59, 0.7); }
+    .gecmis-satiri:hover { 
+        border-color: rgba(129, 140, 248, 0.3); 
+        background: rgba(30, 41, 59, 0.7); 
+    }
     .gecmis-nokta {
         width: 8px;
         height: 8px;
@@ -272,35 +296,48 @@ st.markdown("""
         padding: 1rem;
         background: rgba(30, 41, 59, 0.3);
     }
+    
+    /* Siber Güvenlik Butonu */
     .stButton button {
-        border-radius: 12px;
+        border-radius: 10px;
         font-weight: 600;
         padding: 0.65rem 0;
-        border: none;
-        background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        transition: all 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        color: white;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
     }
     .stButton button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        color: white;
     }
+    
+    /* Text Alanı */
     .stTextArea textarea {
-        border-radius: 14px;
-        border: 1.5px solid rgba(255, 255, 255, 0.08);
-        background: rgba(15, 23, 42, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(15, 23, 42, 0.5);
         color: #F8FAFC;
+    }
+    .stTextArea textarea:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
     }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="baslik-kutu">
-    <div class="baslik-ikon">🛡️</div>
-    <h1>Dolandırıcı Mesaj Tespit Asistanı</h1>
-    <p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="baslik-kutu">'
+    '<div class="baslik-ikon">🛡️</div>'
+    '<h1>Dolandırıcı Mesaj Tespit Asistanı</h1>'
+    '<p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>'
+    '</div>', 
+    unsafe_allow_html=True
+)
 
 
 @st.cache_resource(show_spinner="Yapay zeka modeli yükleniyor... Lütfen bekleyin.")
@@ -492,8 +529,9 @@ if st.session_state.gecmis:
         st.session_state.gecmis = []
         st.rerun()
 
-st.markdown("""
-<div class="footer-not">
-    Bu araç kesin doğruluk garanti etmez, şüphe durumunda her zaman sağduyunuzu kullanın.
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="footer-not">'
+    'Bu araç kesin doğruluk garanti etmez, şüphe durumunda her zaman sağduyunuzu kullanın.'
+    '</div>', 
+    unsafe_allow_html=True
+)
