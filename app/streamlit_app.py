@@ -1,6 +1,5 @@
 import streamlit as st
 import sys
-import time
 from pathlib import Path
 from datetime import datetime
 from PIL import Image
@@ -92,9 +91,6 @@ st.markdown("""
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
-    div[data-testid="stRadio"] label[data-baseweb="radio"] {
-        display: none;
-    }
     div[data-testid="stRadio"] > label {
         color: #A8B3C7;
         font-size: 0.92rem;
@@ -146,6 +142,33 @@ st.markdown("""
     .stTextArea textarea:focus {
         border-color: #0EA5E9 !important;
         box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25) !important;
+    }
+
+    /* --- Premium yukleme animasyonu --- */
+    @keyframes taramaDonme {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .yukleme-kutu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.9rem;
+        background: rgba(14, 165, 233, 0.08);
+        border: 1px solid rgba(14, 165, 233, 0.25);
+        border-radius: 16px;
+        padding: 1.3rem;
+        margin-top: 1.5rem;
+        animation: yumusakGiris 0.3s ease-out;
+    }
+    .yukleme-ikon {
+        font-size: 1.4rem;
+        animation: taramaDonme 1.4s linear infinite;
+    }
+    .yukleme-metin {
+        color: #BAE6FD;
+        font-size: 0.98rem;
+        font-weight: 600;
     }
 
     .sonuc-cerceve {
@@ -322,7 +345,6 @@ st.markdown("""
         background: rgba(30, 41, 59, 0.3);
     }
 
-    /* --- Buton: metalik mavi degrade, siber guvenlik temasina uygun --- */
     .stButton button {
         border-radius: 14px;
         font-weight: 700;
@@ -437,15 +459,18 @@ if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
     else:
-        with st.status("🛡️ Güvenlik kalkanı çalıştırılıyor...", expanded=True) as status:
-            st.write("🔍 Metin ayıklanıyor ve taranıyor...")
-            time.sleep(0.3)
-            st.write("🤖 Yapay zeka bağlamı inceliyor...")
-            time.sleep(0.3)
-            st.write("⚠️ Tehdit ve oltalama kalıpları denetleniyor...")
-            sonuc = tahmin_et(mesaj, tokenizer, model)
-            time.sleep(0.2)
-            status.update(label="✅ Analiz tamamlandı!", state="complete", expanded=False)
+        yukleme_yer_tutucu = st.empty()
+        yukleme_yer_tutucu.markdown(
+            '<div class="yukleme-kutu">'
+            '<div class="yukleme-ikon">🛡️</div>'
+            '<div class="yukleme-metin">Güvenlik taraması yapılıyor...</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+
+        sonuc = tahmin_et(mesaj, tokenizer, model)
+
+        yukleme_yer_tutucu.empty()
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
