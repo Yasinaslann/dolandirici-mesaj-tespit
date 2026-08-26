@@ -473,16 +473,17 @@ if analiz_butonu:
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
-        baslik = sonuc["baslik"]
         
-        # SADECE BURASI EKLENDİ: Başlığın yanına oran yüzdesini yazdırır
-        if "oran" in sonuc and str(sonuc["oran"]) not in baslik:
-            baslik = f"{baslik} (%{sonuc['oran']:.1f})"
+        # ÜST BAŞLIK İÇİN ORAN EKLENİYOR
+        oran_metni = f" (%{sonuc['oran']:.1f})" if "oran" in sonuc else ""
+        baslik = sonuc["baslik"] if "oran" in sonuc.get("baslik", "") else sonuc["baslik"] + oran_metni
 
+        # GEÇMİŞE KAYDEDERKEN ORANI DA HAFIZAYA ALIYORUZ
         st.session_state.gecmis.insert(0, {
             "mesaj": mesaj[:55] + ("..." if len(mesaj) > 55 else ""),
             "risk": risk,
             "saat": datetime.now().strftime("%H:%M"),
+            "oran": sonuc.get("oran", 0.0) # YENİ EKLENEN KISIM
         })
         st.session_state.gecmis = st.session_state.gecmis[:10]
 
@@ -555,7 +556,13 @@ if st.session_state.gecmis:
             "supheli": "etiket-supheli",
             "guvenli": "etiket-guvenli",
         }.get(kayit["risk"], "etiket-supheli")
+        
         etiket_metni = ETIKET_METNI.get(kayit["risk"], "Bilinmiyor")
+        
+        # GEÇMİŞTEKİ ETİKETİN YANINA ORAN EKLENİYOR
+        if "oran" in kayit and kayit["oran"] > 0:
+            etiket_metni += f" (%{kayit['oran']:.1f})"
+            
         gecmis_html += (
             f'<div class="gecmis-satiri {gecmis_sinif}">'
             f'<div class="gecmis-mesaj">{kayit["mesaj"]}</div>'
