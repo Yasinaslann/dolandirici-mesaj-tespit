@@ -56,7 +56,6 @@ st.markdown("""
         margin: 2.2rem 0 1rem 0;
     }
 
-    /* --- Istatistik kartlari: sade stil + hover buyume --- */
     .istatistik-serit {
         display: flex;
         gap: 0.9rem;
@@ -94,35 +93,36 @@ st.markdown("""
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
-    div[data-testid="stRadio"] > div[role="radiogroup"] {
-        display: flex;
-        gap: 0.6rem;
-        background: rgba(15, 23, 42, 0.55);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    /* --- Giris yontemi secim kartlari (buton tabanli, guvenilir) --- */
+    div[data-testid="column"] .stButton button {
+        width: 100%;
+        height: 100px;
         border-radius: 16px;
-        padding: 0.4rem;
+        border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+        background: rgba(30, 41, 59, 0.5) !important;
+        box-shadow: none !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        transition: all 0.18s ease;
+        white-space: pre-line;
+        line-height: 1.35;
     }
-    div[data-testid="stRadio"] label {
-        flex: 1;
-        text-align: center;
-        border-radius: 12px;
-        padding: 0.85rem 0.5rem !important;
-        margin: 0 !important;
-        transition: background-color 0.15s ease, box-shadow 0.15s ease;
-        cursor: pointer;
+    div[data-testid="column"] .stButton button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(129, 140, 248, 0.5) !important;
+        background: rgba(30, 41, 59, 0.8) !important;
+    }
+    div[data-testid="column"] .stButton button p {
+        font-size: 0.95rem !important;
         font-weight: 600;
-        font-size: 1rem;
     }
-    div[data-testid="stRadio"] label:has(input:checked) {
-        background: linear-gradient(135deg, #6366F1, #4F46E5);
-        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-    }
-    div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
-        font-size: 1rem !important;
-        color: #F1F5F9 !important;
-    }
-    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
-        display: none;
+    .secim-aktif button {
+        background: linear-gradient(135deg, #6366F1, #4F46E5) !important;
+        border-color: transparent !important;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
     }
 
     .stTextArea textarea {
@@ -314,20 +314,6 @@ st.markdown("""
         padding: 1.1rem;
         background: rgba(30, 41, 59, 0.3);
     }
-    .stButton button {
-        border-radius: 14px;
-        font-weight: 700;
-        font-size: 1.02rem;
-        padding: 0.75rem 0;
-        border: none;
-        background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
-        transition: all 0.2s ease;
-    }
-    .stButton button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -360,6 +346,9 @@ except Exception as e:
 if "gecmis" not in st.session_state:
     st.session_state.gecmis = []
 
+if "giris_yontemi" not in st.session_state:
+    st.session_state.giris_yontemi = "metin"
+
 
 def istatistik_html_uret():
     toplam = len(st.session_state.gecmis)
@@ -376,24 +365,50 @@ def istatistik_html_uret():
     )
 
 
-# Yer tutucu: analiz sonrasi bu ayni yerin icerigini guncelleyecegiz,
-# boylece istatistikler bir tik geriden gelmeyip ANINDA guncellenecek.
 istatistik_yer_tutucu = st.empty()
 if st.session_state.gecmis:
     istatistik_yer_tutucu.markdown(istatistik_html_uret(), unsafe_allow_html=True)
 
-st.markdown('<div class="bolum-baslik">Mesaj Türü Seçiniz</div>', unsafe_allow_html=True)
+st.markdown('<div class="bolum-baslik">Mesaj Kaynağını Seçin</div>', unsafe_allow_html=True)
 
-giris_yontemi = st.radio(
-    "Giriş yöntemi",
-    ["✍️ Metni Giriniz", "📷 Fotoğraf Yükle"],
-    horizontal=True,
-    label_visibility="collapsed",
-)
+sutun1, sutun2 = st.columns(2)
+
+with sutun1:
+    metin_sec = st.button("✍️\nMetin Girin", use_container_width=True, key="btn_metin")
+with sutun2:
+    foto_sec = st.button("📷\nFotoğraf Yükleyin", use_container_width=True, key="btn_foto")
+
+if metin_sec:
+    st.session_state.giris_yontemi = "metin"
+if foto_sec:
+    st.session_state.giris_yontemi = "foto"
+
+# Secili olan butonu vurgulamak icin kucuk bir JS/CSS ipucu yerine,
+# secili moda gore aktif class ekleyen bir yardimci markdown enjekte ediyoruz.
+if st.session_state.giris_yontemi == "metin":
+    st.markdown("""
+    <style>
+        div[data-testid="column"]:nth-of-type(1) .stButton button {
+            background: linear-gradient(135deg, #6366F1, #4F46E5) !important;
+            border-color: transparent !important;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+        div[data-testid="column"]:nth-of-type(2) .stButton button {
+            background: linear-gradient(135deg, #6366F1, #4F46E5) !important;
+            border-color: transparent !important;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 mesaj = ""
 
-if giris_yontemi == "✍️ Metni Giriniz":
+if st.session_state.giris_yontemi == "metin":
     mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
@@ -445,8 +460,6 @@ if analiz_butonu:
         })
         st.session_state.gecmis = st.session_state.gecmis[:10]
 
-        # Yer tutucuyu GUNCEL veriyle hemen yeniden doldur - boylece
-        # istatistikler bir tik geriden gelmez, aninda yansir.
         istatistik_yer_tutucu.markdown(istatistik_html_uret(), unsafe_allow_html=True)
 
         cerceve_sinif = {
