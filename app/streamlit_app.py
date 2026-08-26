@@ -144,7 +144,6 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25) !important;
     }
 
-    /* --- Premium yukleme animasyonu --- */
     @keyframes taramaDonme {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }

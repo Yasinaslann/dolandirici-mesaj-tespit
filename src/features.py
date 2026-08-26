@@ -27,10 +27,12 @@ TEHDIT_KELIMELERI = [
 ]
 
 FIZIKSEL_SIDDET_KELIMELERI = [
-    "oldur", "oldun", "oldururum", "oldurulur", "gebert", "gebertirim",
+    "oldur", "oldun", "oldururum", "oldurulur", "olursun", "olecek",
+    "gebert", "gebertirim",
     "vururum", "keserim", "bicaklarim", "kan dokerim", "doverim",
     "kacirir", "kacirim", "zarar veririm", "zarar gorursun",
     "hayatina son veririm", "canina kiyarim", "mahvederim seni",
+    "calarim", "hirsizlik yaparim", "soyarim", "gaspederim",
 ]
 
 SANTAJ_TEHDIT_KELIMELERI = [
@@ -38,7 +40,8 @@ SANTAJ_TEHDIT_KELIMELERI = [
     "param gelmezse", "atmazsan", "vermezsen", "santaj",
     "tehdit ederim", "hapis", "taciz", "tecavuz", "zorla", "isterse zarar",
     "ifsa ederim", "rezil ederim", "isini bitiririm", "hayatini karartirim",
-    "yakarim",
+    "yakarim", "polis gelecek", "polis gelir", "jandarma gelecek",
+    "evine gelirim", "kapina dayanirim", "adamlarim gelir",
 ]
 
 GENEL_KOSUL_BAGLACLARI = ["yoksa"]
@@ -46,7 +49,8 @@ GENEL_KOSUL_BAGLACLARI = ["yoksa"]
 ZORLAMA_KOSUL_KELIMELERI = [
     "gelmezsen", "yapmazsan", "vermezsen", "aramazsan", "cevap vermezsen",
     "soylemezsen", "gelmez isen", "gelmedigin takdirde", "odemezsen",
-    "gelmen lazim", "yapman lazim", "gelmelisin",
+    "gelmen lazim", "yapman lazim", "gelmelisin", "atman lazim",
+    "gondermezsen", "yollamazsan", "getirmezsen",
 ]
 
 PARA_TALEBI_KELIMELERI = [
@@ -81,12 +85,12 @@ SUPHELI_DOMAIN_KALIPLARI = [
 ]
 
 PARA_TALEBI_REGEX = re.compile(
-    r"\d+\s*(tl|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim|atesle)"
+    r"\d+\s*(tl|t|lira|dolar|euro)\b.{0,15}\b(ver|at|gonder|yolla|istiyorum|isterim|lazim|atesle)"
 )
 
 GENEL_PARA_TALEBI_REGEX = re.compile(
-    r"\b(biraz|bir miktar|birazcik|acil|az)?\s*para\s*"
-    r"(atesle|at|gonder|yolla|ver|isterim|istiyorum|lazim)"
+    r"\bpara\w*\s*"
+    r"(atesle|at\b|gonder|yolla|ver\b|isterim|istiyorum|lazim|calarim)"
 )
 
 TIKLA_ODUL_REGEX = re.compile(
