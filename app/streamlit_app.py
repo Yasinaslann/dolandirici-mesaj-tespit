@@ -18,7 +18,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     .stApp {
-        background: radial-gradient(circle at 20% 0%, #1A1F35 0%, #0B0F19 55%);
+        background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 70%);
     }
 
     @keyframes yumusakGiris {
@@ -28,60 +28,61 @@ st.markdown("""
 
     .baslik-kutu {
         text-align: center;
-        padding: 2.5rem 1rem 1.8rem 1rem;
+        padding: 2.5rem 1rem 1.5rem 1rem;
     }
     .baslik-ikon {
-        font-size: 2.8rem;
-        margin-bottom: 0.4rem;
-        filter: drop-shadow(0 4px 12px rgba(129, 140, 248, 0.35));
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(0 4px 12px rgba(129, 140, 248, 0.4));
     }
     .baslik-kutu h1 {
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: #F3F4F6;
-        margin-bottom: 0.35rem;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #F8FAFC;
+        margin-bottom: 0.3rem;
         letter-spacing: -0.02em;
     }
     .baslik-kutu p {
-        color: #8B93A7;
-        font-size: 0.92rem;
+        color: #94A3B8;
+        font-size: 0.95rem;
     }
 
     .bolum-baslik {
-        color: #C7CBDA;
+        color: #94A3B8;
         font-size: 0.85rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin: 1.6rem 0 0.7rem 0;
+        margin: 1.8rem 0 0.8rem 0;
     }
 
     .istatistik-serit {
         display: flex;
-        gap: 0.7rem;
+        gap: 0.8rem;
         margin: 0.5rem 0 1.5rem 0;
     }
     .istatistik-kutu {
         flex: 1;
-        background-color: #12172A;
-        border: 1px solid #1F2740;
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 14px;
-        padding: 0.9rem 0.6rem;
+        padding: 0.9rem 0.5rem;
         text-align: center;
-        transition: transform 0.15s ease, border-color 0.15s ease;
+        transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .istatistik-kutu:hover {
         transform: translateY(-2px);
-        border-color: #3A4368;
+        border-color: rgba(129, 140, 248, 0.3);
     }
     .istatistik-sayi {
         font-size: 1.5rem;
         font-weight: 800;
     }
     .istatistik-etiket {
-        font-size: 0.72rem;
-        color: #7C8397;
-        margin-top: 0.15rem;
+        font-size: 0.7rem;
+        color: #94A3B8;
+        margin-top: 0.2rem;
         text-transform: uppercase;
         letter-spacing: 0.03em;
     }
@@ -90,72 +91,72 @@ st.markdown("""
     .sayi-guvenli { color: #4ADE80; }
 
     .sonuc-cerceve {
-        margin-top: 1.6rem;
+        margin-top: 1.5rem;
         border-radius: 20px;
         padding: 2px;
         animation: yumusakGiris 0.45s ease-out;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     }
     .sonuc-cerceve.cerceve-yuksek { background: linear-gradient(135deg, #EF4444, #7F1D1D); }
     .sonuc-cerceve.cerceve-supheli { background: linear-gradient(135deg, #F59E0B, #78350F); }
     .sonuc-cerceve.cerceve-guvenli { background: linear-gradient(135deg, #22C55E, #14532D); }
 
     .sonuc-ic {
-        background-color: #12172A;
+        background-color: #0f172a;
         border-radius: 18px;
-        padding: 1.9rem;
+        padding: 1.8rem;
     }
 
     .sonuc-ust {
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1.3rem;
+        margin-bottom: 1.2rem;
     }
     .sonuc-daire {
-        width: 58px;
-        height: 58px;
+        width: 56px;
+        height: 56px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         flex-shrink: 0;
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
     }
-    .daire-yuksek { background-color: #3A1518; }
-    .daire-supheli { background-color: #3A2E10; }
-    .daire-guvenli { background-color: #103A22; }
+    .daire-yuksek { background: rgba(239, 68, 68, 0.2); }
+    .daire-supheli { background: rgba(245, 158, 11, 0.2); }
+    .daire-guvenli { background: rgba(34, 197, 94, 0.2); }
 
     .sonuc-baslik-metin {
-        font-size: 1.28rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #F9FAFB;
+        color: #F8FAFC;
     }
     .sonuc-alt-metin {
-        color: #7C8397;
+        color: #94A3B8;
         font-size: 0.82rem;
-        margin-top: 0.15rem;
+        margin-top: 0.2rem;
     }
 
     .neden-baslik {
-        color: #9CA3B8;
+        color: #94A3B8;
         font-size: 0.78rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        margin-bottom: 0.7rem;
-        padding-top: 0.4rem;
-        border-top: 1px solid #1F2740;
+        margin-bottom: 0.8rem;
+        padding-top: 0.6rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
     .neden-satiri {
         display: flex;
         align-items: flex-start;
-        gap: 0.65rem;
-        padding: 0.5rem 0;
-        color: #D6D9E4;
+        gap: 0.7rem;
+        padding: 0.45rem 0;
+        color: #E2E8F0;
         font-size: 0.92rem;
-        line-height: 1.55;
+        line-height: 1.5;
     }
     .neden-nokta {
         width: 6px;
@@ -163,29 +164,30 @@ st.markdown("""
         border-radius: 50%;
         background-color: #818CF8;
         flex-shrink: 0;
-        margin-top: 0.55rem;
+        margin-top: 0.5rem;
     }
 
     .aksiyon-kutu {
-        background-color: #151B2B;
-        border: 1px solid #232B45;
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
         border-radius: 16px;
-        padding: 1.4rem 1.5rem;
-        margin-top: 1.3rem;
+        padding: 1.5rem;
+        margin-top: 1.2rem;
         animation: yumusakGiris 0.5s ease-out;
     }
     .aksiyon-baslik {
-        color: #F3F4F6;
+        color: #F8FAFC;
         font-weight: 700;
-        font-size: 0.98rem;
-        margin-bottom: 1.1rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
     .aksiyon-satiri {
         display: flex;
         align-items: center;
         gap: 0.9rem;
         padding: 0.6rem 0;
-        border-top: 1px solid #1E2540;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
     }
     .aksiyon-satiri:first-of-type { border-top: none; }
     .aksiyon-numara {
@@ -198,32 +200,32 @@ st.markdown("""
         justify-content: center;
         font-size: 0.75rem;
         font-weight: 700;
-        color: #E0E3FF;
+        color: #FFFFFF;
         flex-shrink: 0;
     }
     .aksiyon-metin {
-        color: #C3C8D6;
+        color: #CBD5E1;
         font-size: 0.88rem;
         line-height: 1.5;
     }
-    .aksiyon-metin strong { color: #F3F4F6; }
+    .aksiyon-metin strong { color: #F8FAFC; }
 
     .gecmis-satiri {
         display: flex;
         align-items: center;
-        gap: 0.7rem;
-        padding: 0.65rem 0.85rem;
-        border-radius: 10px;
-        margin-bottom: 0.4rem;
-        background-color: #12172A;
-        border: 1px solid #1B2338;
+        gap: 0.8rem;
+        padding: 0.7rem 0.9rem;
+        border-radius: 12px;
+        margin-bottom: 0.5rem;
+        background: rgba(30, 41, 59, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.04);
         font-size: 0.85rem;
-        transition: border-color 0.15s ease;
+        transition: all 0.2s ease;
     }
-    .gecmis-satiri:hover { border-color: #2E3757; }
+    .gecmis-satiri:hover { border-color: rgba(129, 140, 248, 0.3); background: rgba(30, 41, 59, 0.7); }
     .gecmis-nokta {
-        width: 9px;
-        height: 9px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         flex-shrink: 0;
     }
@@ -231,61 +233,62 @@ st.markdown("""
     .nokta-supheli { background-color: #F59E0B; }
     .nokta-guvenli { background-color: #22C55E; }
     .gecmis-mesaj {
-        color: #C7CBDA;
+        color: #CBD5E1;
         flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
     .gecmis-etiket {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         font-weight: 700;
-        padding: 0.2rem 0.55rem;
+        padding: 0.2rem 0.5rem;
         border-radius: 999px;
         flex-shrink: 0;
         text-transform: uppercase;
-        letter-spacing: 0.02em;
     }
-    .etiket-yuksek { background-color: #3A1518; color: #F87171; }
-    .etiket-supheli { background-color: #3A2E10; color: #FBBF24; }
-    .etiket-guvenli { background-color: #103A22; color: #4ADE80; }
+    .etiket-yuksek { background: rgba(239, 68, 68, 0.2); color: #F87171; }
+    .etiket-supheli { background: rgba(245, 158, 11, 0.2); color: #FBBF24; }
+    .etiket-guvenli { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
     .gecmis-saat {
-        color: #565E77;
+        color: #64748B;
         font-size: 0.75rem;
         flex-shrink: 0;
     }
 
     .footer-not {
         text-align: center;
-        color: #4B5268;
+        color: #64748B;
         font-size: 0.75rem;
         margin-top: 3rem;
-        padding-top: 1.3rem;
-        border-top: 1px solid #1A2036;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     div[data-testid="stFileUploader"] {
-        border: 1.5px dashed #2A3350;
+        border: 1.5px dashed rgba(129, 140, 248, 0.3);
         border-radius: 16px;
-        padding: 1.1rem;
-        background-color: #10152680;
+        padding: 1rem;
+        background: rgba(30, 41, 59, 0.3);
     }
     .stButton button {
         border-radius: 12px;
         font-weight: 600;
         padding: 0.65rem 0;
         border: none;
-        background: linear-gradient(135deg, #818CF8, #6366F1);
-        transition: transform 0.12s ease, box-shadow 0.12s ease;
+        background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        transition: all 0.2s ease;
     }
     .stButton button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
     }
     .stTextArea textarea {
         border-radius: 14px;
-        border: 1.5px solid #232B45;
-        background-color: #10152680;
+        border: 1.5px solid rgba(255, 255, 255, 0.08);
+        background: rgba(15, 23, 42, 0.6);
+        color: #F8FAFC;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -294,7 +297,7 @@ st.markdown("""
 <div class="baslik-kutu">
     <div class="baslik-ikon">🛡️</div>
     <h1>Dolandırıcı Mesaj Tespit Asistanı</h1>
-    <p>Yapay zeka destekli güvenlik katmanı&nbsp;&nbsp;·&nbsp;&nbsp;Ebeveynler için tasarlandı</p>
+    <p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -319,6 +322,7 @@ except Exception as e:
 if "gecmis" not in st.session_state:
     st.session_state.gecmis = []
 
+# İstatistik Şeridi
 if st.session_state.gecmis:
     toplam = len(st.session_state.gecmis)
     yuksek_sayisi = sum(1 for g in st.session_state.gecmis if g["risk"] == "yuksek_riskli")
@@ -358,7 +362,7 @@ giris_yontemi = st.radio(
 mesaj = ""
 
 if giris_yontemi == "✍️ Metni yapıştır":
-    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi...", label_visibility="collapsed")
+    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=130, placeholder="Örn: Kargonuz teslim edilemedi, tıklayın...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
         "SMS, WhatsApp ya da e-posta ekran görüntüsünü yükleyin",
@@ -371,13 +375,13 @@ else:
         with st.spinner("Görseldeki metin okunuyor..."):
             from src.ocr import resimden_metin_cikar
             get_ocr_reader()
-            mesaj = resimden_metin_cikar(resim)
-        if mesaj:
-            mesaj = st.text_area("Görselden okunan metin (gerekirse düzeltebilirsiniz):", value=mesaj, height=100)
+            okunan_metin = resimden_metin_cikar(resim)
+        if okunan_metin:
+            mesaj = st.text_area("Görselden okunan metin (gerekirse düzeltebilirsiniz):", value=okunan_metin, height=100)
         else:
-            st.warning("Görselden metin okunamadı, lütfen daha net bir görsel deneyin ya da metni elle yazın.")
+            st.warning("Görselden metin okunamadı, lütfen daha net bir görsel yükleyin ya da metni elle yazın.")
 
-analiz_butonu = st.button("🔍  Mesajı Analiz Et", type="primary", use_container_width=True)
+analiz_butonu = st.button("🔍 Mesajı Analiz Et", type="primary", use_container_width=True)
 
 ETIKET_METNI = {
     "yuksek_riskli": "Yüksek Riskli",
@@ -389,15 +393,25 @@ if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
     else:
-        with st.spinner("Yapay zeka bağlamı inceliyor..."):
+        # Şık st.status akışı eklendi
+        with st.status("🛡️ Güvenlik kalkanı çalıştırılıyor...", expanded=True) as status:
+            st.write("🔍 Metin ayıklanıyor ve taranıyor...")
+            import time
+            time.sleep(0.3)
+            st.write("🤖 BERT Yapay Zeka modeli bağlamı inceliyor...")
+            time.sleep(0.3)
+            st.write("⚠️ Oltalama ve tehdit kalkanları denetleniyor...")
             sonuc = tahmin_et(mesaj, tokenizer, model)
+            time.sleep(0.2)
+            status.update(label="✅ Analiz tamamlandı!", state="complete", expanded=False)
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
         baslik = sonuc["baslik"]
 
+        # Geçmişe kaydet
         st.session_state.gecmis.insert(0, {
-            "mesaj": mesaj[:60] + ("..." if len(mesaj) > 60 else ""),
+            "mesaj": mesaj[:55] + ("..." if len(mesaj) > 55 else ""),
             "risk": risk,
             "saat": datetime.now().strftime("%H:%M"),
         })
@@ -417,7 +431,7 @@ if analiz_butonu:
 
         alt_metin = {
             "yuksek_riskli": "Bilinen dolandırıcılık/tehdit kalıplarıyla eşleşti",
-            "supheli": "Bazı şüpheli sinyaller tespit edildi",
+            "supheli": "Bazı şüpheli sinyaller veya riskler tespit edildi",
             "guvenli": "Bilinen hiçbir riskli kalıba uymuyor",
         }.get(risk, "")
 
@@ -445,18 +459,18 @@ if analiz_butonu:
         if risk in ("yuksek_riskli", "supheli"):
             st.markdown("""
             <div class="aksiyon-kutu">
-                <div class="aksiyon-baslik">Şimdi Ne Yapmalısınız?</div>
+                <div class="aksiyon-baslik">🚨 Şimdi Ne Yapmalısınız?</div>
                 <div class="aksiyon-satiri">
                     <div class="aksiyon-numara">01</div>
-                    <div class="aksiyon-metin">Mesajdaki linke <strong>kesinlikle tıklamayın</strong></div>
+                    <div class="aksiyon-metin">Mesajdaki linke veya ek dosyaya <strong>kesinlikle tıklamayın</strong></div>
                 </div>
                 <div class="aksiyon-satiri">
                     <div class="aksiyon-numara">02</div>
-                    <div class="aksiyon-metin">Kişisel bilgi ya da para <strong>paylaşmayın</strong></div>
+                    <div class="aksiyon-metin">Kişisel bilgi, şifre ya da para <strong>paylaşmayın</strong></div>
                 </div>
                 <div class="aksiyon-satiri">
                     <div class="aksiyon-numara">03</div>
-                    <div class="aksiyon-metin">Şüpheliyseniz kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div>
+                    <div class="aksiyon-metin">Şüpheliyseniz ilgili kurumu <strong>resmi telefon numarasından</strong> arayıp doğrulayın</div>
                 </div>
                 <div class="aksiyon-satiri">
                     <div class="aksiyon-numara">04</div>
@@ -464,11 +478,12 @@ if analiz_butonu:
                 </div>
                 <div class="aksiyon-satiri">
                     <div class="aksiyon-numara">05</div>
-                    <div class="aksiyon-metin">Emin değilseniz, teknolojiye yakın bir yakınınıza danışın</div>
+                    <div class="aksiyon-metin">Tanıdığınızdan gelse bile hesabı çalınmış olabilir, sesli arayarak teyit edin</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
+# Oturum Geçmişi Bölümü
 if st.session_state.gecmis:
     st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
 
@@ -498,12 +513,12 @@ if st.session_state.gecmis:
         """
     st.markdown(gecmis_html, unsafe_allow_html=True)
 
-    if st.button("Geçmişi temizle", use_container_width=True):
+    if st.button("🗑️ Geçmişi Temizle", use_container_width=True):
         st.session_state.gecmis = []
         st.rerun()
 
 st.markdown("""
 <div class="footer-not">
-    Bu araç kesin doğruluk garanti etmez, sağduyunuzu her zaman kullanın.
+    Bu araç kesin doğruluk garanti etmez, şüphe durumunda her zaman sağduyunuzu kullanın.
 </div>
 """, unsafe_allow_html=True)
