@@ -49,6 +49,8 @@ def tahmin_et(metin, tokenizer=None, model=None):
 
     if kural_ozellikleri["fiziksel_siddet_skoru"] > 0:
         tahmin = "yuksek_riskli"
+    elif kural_ozellikleri["ortulu_santaj_skoru"] > 0:
+        tahmin = "yuksek_riskli"
     elif kural_ozellikleri["santaj_tehdit_skoru"] > 0:
         tahmin = "yuksek_riskli"
     elif kural_ozellikleri["kimlik_bilgisi_skoru"] > 0 and (
@@ -57,8 +59,14 @@ def tahmin_et(metin, tokenizer=None, model=None):
         tahmin = "yuksek_riskli"
     elif kural_ozellikleri["kripto_varlik_skoru"] > 0 and kural_ozellikleri["link_var"]:
         tahmin = "yuksek_riskli"
+    # Akrabalik tuzagi + para talebi: BERT ne derse desin, bu kombinasyon
+    # KOSULSUZ yuksek_riskli'dir - "guvenli" dese bile artik kisitlama yok.
+    elif kural_ozellikleri["akrabalik_skoru"] > 0 and (
+        kural_ozellikleri["para_talebi_skoru"] > 0 or kural_ozellikleri["genel_para_talebi"]
+    ):
+        tahmin = "yuksek_riskli"
     elif kural_ozellikleri["tikla_odul"]:
-        tahmin = "supheli"
+        tahmin = "supheli" if tahmin == "guvenli" else tahmin
     elif tahmin == "guvenli" and (kural_ozellikleri["supheli_link"] or kural_ozellikleri["tehdit_skoru"] >= 2):
         tahmin = "supheli"
     elif tahmin == "guvenli" and kural_ozellikleri["genel_para_talebi"]:

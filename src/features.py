@@ -44,19 +44,31 @@ SANTAJ_TEHDIT_KELIMELERI = [
     "evine gelirim", "kapina dayanirim", "adamlarim gelir",
 ]
 
+# YENI: ortulu/dolayli santaj - dogrudan siddet fiili yok ama baglam
+# acikca tehdit/santaj niteliginde. "Aksi halde kotu bir sey olur" tarzi.
+ORTULU_SANTAJ_KELIMELERI = [
+    "ailen ogrenmesin", "kimseye soylemeyeyim", "kimseye bir sey soylemeyeyim",
+    "is cirkinlesir", "zor olur", "tatli yoldan halledelim",
+    "bilmiyorsun neler olur", "goruruz", "gorusuruz",
+    "bu sekilde devam etmesin istersen", "aramizda kalsin istersen",
+    "kotu bir sey olmasin istersen", "sikinti cikmasin istersen",
+    "bunu byle bilme", "pisman edecek seyler yaparim",
+    "herkes ogrensin ister misin", "cevrende duyulsun ister misin",
+]
+
 GENEL_KOSUL_BAGLACLARI = ["yoksa"]
 
 ZORLAMA_KOSUL_KELIMELERI = [
     "gelmezsen", "yapmazsan", "vermezsen", "aramazsan", "cevap vermezsen",
     "soylemezsen", "gelmez isen", "gelmedigin takdirde", "odemezsen",
     "gelmen lazim", "yapman lazim", "gelmelisin", "atman lazim",
-    "gondermezsen", "yollamazsan", "getirmezsen",
+    "gondermezsen", "yollamazsan", "getirmezsen", "istersen",
 ]
 
 PARA_TALEBI_KELIMELERI = [
     "tl at", "para at", "para gonder", "havale yap", "eft yap", "gonderir misin",
     "ibana gonder", "hesabima gonder", "tl ver", "para ver", "para isterim",
-    "para istiyorum", "para atesle", "atesleyin",
+    "para istiyorum", "para atesle", "atesleyin", "lira at", "lira gonder",
 ]
 
 KIMLIK_BILGISI_KELIMELERI = [
@@ -70,7 +82,7 @@ KRIPTO_VARLIK_KELIMELERI = [
 
 RESMI_KURUM_KELIMELERI = [
     "bddk", "e-devlet", "edevlet", "gib", "ziraat", "halkbank", "vakifbank",
-    "is bankasi", "garanti", "ptt", "kargo",
+    "is bankasi", "garanti", "ptt", "kargo", "sgk", "e-recete", "e recete",
 ]
 
 AKRABALIK_KELIMELERI = [
@@ -81,7 +93,7 @@ AKRABALIK_KELIMELERI = [
 SUPHELI_DOMAIN_KALIPLARI = [
     r"bit\.ly", r"tinyurl", r"\.info\b", r"\.xyz\b", r"\.top\b",
     r"-guvenlik\.", r"-odeme\.", r"-tr\.com", r"hizli\.com",
-    r"\b[a-z]{2,6}\d\.com\b",
+    r"\b[a-z]{2,6}\d\.com\b", r"-degisim\.", r"-goruntule\.", r"-online-tr\.",
 ]
 
 PARA_TALEBI_REGEX = re.compile(
@@ -117,7 +129,7 @@ def _zorlama_kalibi_mi(metin):
     metin_normalize = _normalize(metin)
     tehdit_var = any(k in metin_normalize for k in SANTAJ_TEHDIT_KELIMELERI) or any(
         k in metin_normalize for k in FIZIKSEL_SIDDET_KELIMELERI
-    )
+    ) or any(k in metin_normalize for k in ORTULU_SANTAJ_KELIMELERI)
     if not tehdit_var:
         return False
     kosul_var = any(k in metin_normalize for k in ZORLAMA_KOSUL_KELIMELERI)
@@ -139,6 +151,8 @@ def _tikla_odul_mi(metin):
 
 def ozellik_cikar(metin):
     fiziksel_siddet_skoru = _kelime_sayisi(metin, FIZIKSEL_SIDDET_KELIMELERI)
+
+    ortulu_santaj_skoru = _kelime_sayisi(metin, ORTULU_SANTAJ_KELIMELERI)
 
     santaj_skoru = _kelime_sayisi(metin, SANTAJ_TEHDIT_KELIMELERI)
     if _zorlama_kalibi_mi(metin):
@@ -162,6 +176,7 @@ def ozellik_cikar(metin):
         "tikla_odul": int(tikla_odul),
         "tehdit_skoru": _kelime_sayisi(metin, TEHDIT_KELIMELERI),
         "fiziksel_siddet_skoru": fiziksel_siddet_skoru,
+        "ortulu_santaj_skoru": ortulu_santaj_skoru,
         "santaj_tehdit_skoru": santaj_skoru,
         "para_talebi_skoru": para_skoru,
         "genel_para_talebi": int(genel_para_talebi),
@@ -183,6 +198,8 @@ def acikla(metin):
         nedenler.append("Bu mesaj doğrudan fiziksel tehdit içermektedir, derhal polise bildirin.")
         if ozellikler["para_talebi_skoru"] > 0 or ozellikler["genel_para_talebi"]:
             nedenler.append("Ayrica mesaj para/havale talebiyle birlikte geliyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
+    elif ozellikler["ortulu_santaj_skoru"] > 0:
+        nedenler.append("Mesaj örtülü bir şantaj/tehdit dili kullanıyor (açıkça söylemese de sizi korkutmaya/susturmaya çalışıyor). Dikkatli olun, gerekirse 155 Polis İmdat'ı arayın.")
     elif ozellikler["santaj_tehdit_skoru"] > 0 and ozellikler["para_talebi_skoru"] > 0:
         nedenler.append("Dogrudan tehdit icerip karsiliginda para talep ediyor - bu bir santaj/tehdit girisimi olabilir. Hemen 155 Polis Imdat'i arayin.")
     elif ozellikler["santaj_tehdit_skoru"] > 0:
