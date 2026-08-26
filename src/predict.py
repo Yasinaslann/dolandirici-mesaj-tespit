@@ -1,4 +1,5 @@
 import torch
+import re
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from src.features import acikla, ozellik_cikar
 
@@ -13,6 +14,9 @@ RISK_ETIKETLERI = {
 
 _tokenizer_cache = None
 _model_cache = None
+
+# YENİ: Yapay zekayı yormayacak günlük kelimeler beyaz listesi
+GUNLUK_SOHBET = {"selam", "merhaba", "naber", "naberr", "nasılsın", "slm", "mrb", "tamam", "ok", "günaydın", "iyi", "knk", "kanka"}
 
 
 def load_model():
@@ -32,6 +36,20 @@ def tahmin_et(metin, tokenizer=None, model=None):
             "olasiliklar": {},
             "nedenler": [],
             "kural_skorlari": {},
+            "oran": 0.0
+        }
+
+    # YENİ: Kısa ve günlük mesajları yapay zekaya sokmadan "Güvenli" işaretle
+    temiz_kelimeler = set(re.sub(r'[^a-zçğıöşü\s]', '', metin.lower()).split())
+    if len(temiz_kelimeler) <= 3 and temiz_kelimeler.intersection(GUNLUK_SOHBET):
+        return {
+            "risk_seviyesi": "guvenli",
+            "emoji": "🟢",
+            "baslik": "Güvenli görünüyor",
+            "olasiliklar": {"guvenli": 1.0, "supheli": 0.0, "yuksek_riskli": 0.0},
+            "nedenler": ["Günlük sohbet veya selamlama kelimesi tespit edildi."],
+            "kural_skorlari": {},
+            "oran": 100.0
         }
 
     if tokenizer is None or model is None:
@@ -40,9 +58,13 @@ def tahmin_et(metin, tokenizer=None, model=None):
     inputs = tokenizer(metin, return_tensors="pt", truncation=True, padding=True, max_length=128)
     with torch.no_grad():
         outputs = model(**inputs)
+    
     olasilik_tensor = torch.softmax(outputs.logits, dim=1)[0]
     olasiliklar = {ID_TO_ETIKET[i]: float(olasilik_tensor[i]) for i in range(3)}
     tahmin = ID_TO_ETIKET[int(olasilik_tensor.argmax())]
+    
+    # YENİ: En yüksek olasılığı yüzdelik dilime çevirip oran değişkenine ata
+    oran = float(olasilik_tensor.max()) * 100
 
     kural_ozellikleri = ozellik_cikar(metin)
     nedenler = acikla(metin)
@@ -73,10 +95,6 @@ def tahmin_et(metin, tokenizer=None, model=None):
             "Bu mesaj tanıdığınız birinden gelse bile hesabı çalınmış olabilir. "
             "Para göndermeden önce mutlaka kişiyi sesli arayarak teyit edin."
         ]
-    # YENI: odul/kampanya kelimeleri (indirim, firsat, hediye vb.) tek basina
-    # bile BERT "guvenli" dese, en azindan "supheli"ye cekiyoruz - reklam
-    # olabilir ama klasik sahte odul tuzaklarinin da ayni kaliplari kullandigini
-    # unutmayalim.
     elif tahmin == "guvenli" and kural_ozellikleri["odul_skoru"] > 0:
         tahmin = "supheli"
 
@@ -95,4 +113,5 @@ def tahmin_et(metin, tokenizer=None, model=None):
         "olasiliklar": olasiliklar,
         "nedenler": nedenler,
         "kural_skorlari": kural_ozellikleri,
+        "oran": oran  # ARAYÜZÜN BEKLEDİĞİ ORAN BURADAN GİDİYOR
     }
