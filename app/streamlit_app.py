@@ -1,5 +1,6 @@
 import streamlit as st
 import sys
+import time
 from pathlib import Path
 from datetime import datetime
 from PIL import Image
@@ -51,7 +52,6 @@ st.markdown("""
         color: #A8B3C7;
         font-size: 0.92rem;
         font-weight: 700;
-        text-transform: uppercase;
         letter-spacing: 0.06em;
         margin: 2.2rem 0 1rem 0;
     }
@@ -84,7 +84,6 @@ st.markdown("""
         font-size: 0.72rem;
         color: #7C8397;
         margin-top: 0.25rem;
-        text-transform: uppercase;
         letter-spacing: 0.03em;
         font-weight: 600;
     }
@@ -93,7 +92,16 @@ st.markdown("""
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
 
-    /* --- Segmented control: emojisiz, sade metin --- */
+    div[data-testid="stRadio"] label[data-baseweb="radio"] {
+        display: none;
+    }
+    div[data-testid="stRadio"] > label {
+        color: #A8B3C7;
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.6rem;
+    }
     div[data-testid="stRadio"] > div[role="radiogroup"] {
         display: flex;
         gap: 0.6rem;
@@ -102,7 +110,8 @@ st.markdown("""
         border-radius: 16px;
         padding: 0.4rem;
     }
-    div[data-testid="stRadio"] label {
+    div[data-testid="stRadio"] div[role="radiogroup"] label {
+        display: flex !important;
         flex: 1;
         text-align: center;
         border-radius: 12px;
@@ -111,18 +120,17 @@ st.markdown("""
         transition: background-color 0.15s ease, box-shadow 0.15s ease;
         cursor: pointer;
     }
-    div[data-testid="stRadio"] label:has(input:checked) {
-        background: linear-gradient(135deg, #6366F1, #4F46E5);
-        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    div[data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) {
+        background: linear-gradient(135deg, #0EA5E9, #0369A1);
+        box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
     }
-    div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] p {
+    div[data-testid="stRadio"] div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
         font-size: 1.02rem !important;
         font-weight: 600 !important;
         color: #F1F5F9 !important;
-        letter-spacing: normal !important;
         white-space: nowrap;
     }
-    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
+    div[data-testid="stRadio"] div[role="radiogroup"] label[data-baseweb="radio"] > div:first-child {
         display: none;
     }
 
@@ -136,8 +144,8 @@ st.markdown("""
         padding: 1rem;
     }
     .stTextArea textarea:focus {
-        border-color: #818CF8 !important;
-        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25) !important;
+        border-color: #0EA5E9 !important;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25) !important;
     }
 
     .sonuc-cerceve {
@@ -193,7 +201,6 @@ st.markdown("""
         color: #A8B3C7;
         font-size: 0.82rem;
         font-weight: 700;
-        text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-bottom: 0.9rem;
         padding-top: 0.8rem;
@@ -212,7 +219,7 @@ st.markdown("""
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background-color: #818CF8;
+        background-color: #0EA5E9;
         flex-shrink: 0;
         margin-top: 0.55rem;
     }
@@ -244,7 +251,7 @@ st.markdown("""
         width: 30px;
         height: 30px;
         border-radius: 9px;
-        background: linear-gradient(135deg, #6366F1, #4F46E5);
+        background: linear-gradient(135deg, #0EA5E9, #0369A1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -289,7 +296,6 @@ st.markdown("""
         padding: 0.25rem 0.6rem;
         border-radius: 999px;
         flex-shrink: 0;
-        text-transform: uppercase;
     }
     .etiket-yuksek { background: rgba(239, 68, 68, 0.2); color: #F87171; }
     .etiket-supheli { background: rgba(245, 158, 11, 0.2); color: #FBBF24; }
@@ -310,24 +316,28 @@ st.markdown("""
     }
 
     div[data-testid="stFileUploader"] {
-        border: 1.5px dashed rgba(129, 140, 248, 0.3);
+        border: 1.5px dashed rgba(14, 165, 233, 0.35);
         border-radius: 16px;
         padding: 1.1rem;
         background: rgba(30, 41, 59, 0.3);
     }
+
+    /* --- Buton: metalik mavi degrade, siber guvenlik temasina uygun --- */
     .stButton button {
         border-radius: 14px;
         font-weight: 700;
         font-size: 1.02rem;
         padding: 0.75rem 0;
-        border: none;
-        background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+        border: 1px solid rgba(125, 211, 252, 0.3) !important;
+        background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 45%, #0369A1 100%) !important;
+        box-shadow: 0 6px 18px rgba(14, 165, 233, 0.4), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+        color: #F0F9FF !important;
         transition: all 0.2s ease;
     }
     .stButton button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
+        box-shadow: 0 10px 24px rgba(14, 165, 233, 0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+        border-color: rgba(186, 230, 253, 0.5) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -336,7 +346,7 @@ st.markdown("""
 <div class="baslik-kutu">
     <div class="baslik-ikon">🛡️</div>
     <h1>Dolandırıcı Mesaj Tespit Asistanı</h1>
-    <p>Yapay zeka destekli akıllı güvenlik kalkanı &nbsp;·&nbsp; Ebeveynler için koruma</p>
+    <p>Yapay Zeka Destekli Metin Analizi &nbsp;·&nbsp; Şüpheli İçerik Tespit Motoru</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -381,18 +391,15 @@ istatistik_yer_tutucu = st.empty()
 if st.session_state.gecmis:
     istatistik_yer_tutucu.markdown(istatistik_html_uret(), unsafe_allow_html=True)
 
-st.markdown('<div class="bolum-baslik">Mesaj Nasıl Eklensin?</div>', unsafe_allow_html=True)
-
 giris_yontemi = st.radio(
-    "Giriş yöntemi",
-    ["Metin Girin", "Fotoğraf Yükleyin"],
+    "GİRİŞ YÖNTEMİ",
+    ["📋 Metin Yapıştır", "📷 Fotoğraf Yükleyin"],
     horizontal=True,
-    label_visibility="collapsed",
 )
 
 mesaj = ""
 
-if giris_yontemi == "Metin Girin":
+if giris_yontemi == "📋 Metin Yapıştır":
     mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
@@ -412,7 +419,7 @@ else:
         else:
             st.warning("Görselden metin okunamadı, lütfen daha net bir görsel yükleyin ya da metni elle yazın.")
 
-analiz_butonu = st.button("Mesajı Analiz Et", type="primary", use_container_width=True)
+analiz_butonu = st.button("🔍 Mesajı Analiz Et", type="primary", use_container_width=True)
 
 ETIKET_METNI = {
     "yuksek_riskli": "Yüksek Riskli",
@@ -430,8 +437,15 @@ if analiz_butonu:
     if not mesaj.strip():
         st.warning("Lütfen analiz edilecek bir mesaj girin ya da görsel yükleyin.")
     else:
-        with st.spinner("Yapay zeka bağlamı inceliyor..."):
+        with st.status("🛡️ Güvenlik kalkanı çalıştırılıyor...", expanded=True) as status:
+            st.write("🔍 Metin ayıklanıyor ve taranıyor...")
+            time.sleep(0.3)
+            st.write("🤖 Yapay zeka bağlamı inceliyor...")
+            time.sleep(0.3)
+            st.write("⚠️ Tehdit ve oltalama kalıpları denetleniyor...")
             sonuc = tahmin_et(mesaj, tokenizer, model)
+            time.sleep(0.2)
+            status.update(label="✅ Analiz tamamlandı!", state="complete", expanded=False)
 
         risk = sonuc["risk_seviyesi"]
         emoji = sonuc["emoji"]
@@ -477,7 +491,7 @@ if analiz_butonu:
             f'<div><div class="sonuc-baslik-metin">{baslik}</div>'
             f'<div class="sonuc-alt-metin">{alt_metin}</div></div>'
             f'</div>'
-            f'<div class="neden-baslik">Değerlendirme Gerekçesi</div>'
+            f'<div class="neden-baslik">DEĞERLENDİRME GEREKÇESİ</div>'
             f'{nedenler_html}'
             f'</div>'
             f'</div>',
@@ -487,7 +501,7 @@ if analiz_butonu:
         if risk in ("yuksek_riskli", "supheli"):
             st.markdown(
                 '<div class="aksiyon-kutu">'
-                '<div class="aksiyon-baslik">Şimdi Ne Yapmalısınız?</div>'
+                '<div class="aksiyon-baslik">🚨 Şimdi Ne Yapmalısınız?</div>'
                 '<div class="aksiyon-satiri"><div class="aksiyon-numara">01</div>'
                 '<div class="aksiyon-metin">Mesajdaki linke veya ek dosyaya <strong>kesinlikle tıklamayın</strong></div></div>'
                 '<div class="aksiyon-satiri"><div class="aksiyon-numara">02</div>'
@@ -503,7 +517,7 @@ if analiz_butonu:
             )
 
 if st.session_state.gecmis:
-    st.markdown('<div class="bolum-baslik">Bu Oturumdaki Geçmiş Kontroller</div>', unsafe_allow_html=True)
+    st.markdown('<div class="bolum-baslik">BU OTURUMDAKİ GEÇMİŞ KONTROLLER</div>', unsafe_allow_html=True)
 
     gecmis_html = ""
     for kayit in st.session_state.gecmis:
@@ -523,7 +537,7 @@ if st.session_state.gecmis:
         )
     st.markdown(gecmis_html, unsafe_allow_html=True)
 
-    if st.button("Geçmişi Temizle", use_container_width=True):
+    if st.button("🗑️ Geçmişi Temizle", use_container_width=True):
         st.session_state.gecmis = []
         st.rerun()
 
