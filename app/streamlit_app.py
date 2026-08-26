@@ -53,7 +53,7 @@ st.markdown("""
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin: 1.6rem 0 0.7rem 0;
+        margin: 1.6rem 0 0.9rem 0;
     }
 
     .istatistik-serit {
@@ -88,6 +88,30 @@ st.markdown("""
     .sayi-yuksek { color: #F87171; }
     .sayi-supheli { color: #FBBF24; }
     .sayi-guvenli { color: #4ADE80; }
+
+    /* --- Giris yontemi secim kartlari --- */
+    div[data-testid="stRadio"] > div {
+        display: flex;
+        gap: 0.8rem;
+        flex-direction: row;
+    }
+    div[data-testid="stRadio"] label {
+        flex: 1;
+        background-color: #12172A;
+        border: 1.5px solid #232B45;
+        border-radius: 16px;
+        padding: 1.1rem 0.8rem !important;
+        transition: border-color 0.15s ease, transform 0.1s ease, background-color 0.15s ease;
+        cursor: pointer;
+    }
+    div[data-testid="stRadio"] label:hover {
+        border-color: #6366F1;
+        transform: translateY(-2px);
+        background-color: #161C30;
+    }
+    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
+        display: none;
+    }
 
     .sonuc-cerceve {
         margin-top: 1.6rem;
@@ -166,7 +190,6 @@ st.markdown("""
         margin-top: 0.55rem;
     }
 
-    /* --- Aksiyon listesi: numarali rozet tasarimi --- */
     .aksiyon-kutu {
         background-color: #151B2B;
         border: 1px solid #232B45;
@@ -270,6 +293,7 @@ st.markdown("""
         border-radius: 16px;
         padding: 1.1rem;
         background-color: #10152680;
+        margin-top: 0.8rem;
     }
     .stButton button {
         border-radius: 12px;
@@ -287,6 +311,7 @@ st.markdown("""
         border-radius: 14px;
         border: 1.5px solid #232B45;
         background-color: #10152680;
+        margin-top: 0.8rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -347,19 +372,19 @@ if st.session_state.gecmis:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<div class="bolum-baslik">Mesajı Ekleyin</div>', unsafe_allow_html=True)
+st.markdown('<div class="bolum-baslik">Mesajı Nasıl Eklemek İstersiniz?</div>', unsafe_allow_html=True)
 
 giris_yontemi = st.radio(
     "Giriş yöntemi",
-    ["✍️ Metni yapıştır", "📷 Ekran görüntüsü yükle"],
+    ["✍️  Metin Yapıştır\n\nMesajı doğrudan kopyalayıp yapıştırın", "📷  Ekran Görüntüsü\n\nSMS/WhatsApp ekranının fotoğrafını yükleyin"],
     horizontal=True,
     label_visibility="collapsed",
 )
 
 mesaj = ""
 
-if giris_yontemi == "✍️ Metni yapıştır":
-    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi...", label_visibility="collapsed")
+if giris_yontemi.startswith("✍️"):
+    mesaj = st.text_area("Mesajınızı buraya yapıştırın:", height=150, placeholder="Örn: Kargonuz teslim edilemedi, adresinizi güncelleyin...", label_visibility="collapsed")
 else:
     yuklenen_dosya = st.file_uploader(
         "SMS, WhatsApp ya da e-posta ekran görüntüsünü yükleyin",
